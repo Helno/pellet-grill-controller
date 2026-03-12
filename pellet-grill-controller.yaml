@@ -6,8 +6,8 @@
 # center= 0.0 stable win=8
 
 esphome:
-  name: "broil-king"
-  friendly_name: Broil King
+  name: "pellet-grill-controller"
+  friendly_name: Pellet Grill Controller
   platformio_options:
     board_build.flash_mode: dio 
   on_boot:
