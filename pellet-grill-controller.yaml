@@ -27,7 +27,6 @@ esphome:
             - lambda: id(status_msg).publish_state("Ready!");
       #- script.execute: sc_monitor_temp_for_fans
 packages:
-    #touchscreen: !include common/IPS4.0_touchscreen_(esp32S3_Trager_1pot).yaml
 touchscreen:
   - platform: ft63x6
     i2c_id: i2c_bus
@@ -167,7 +166,7 @@ display:
        it.printf(77, 140, id(font45), white, TextAlign::TOP_CENTER, "%.0f°", id(smoker_set_temp).state);
 
        it.printf(243, 118, id(font20), white, TextAlign::TOP_CENTER, "RTD Temp");
-       it.printf(264, 140, id(font45), white, TextAlign::TOP_RIGHT, "%.0f°", id(rtd_temperature_f).state);
+       it.printf(289, 140, id(font45), white, TextAlign::TOP_RIGHT, "%.0f°", id(rtd_temperature_f).state);
 
         // Temperature graph (y=200 to y=283, full width)
         {
