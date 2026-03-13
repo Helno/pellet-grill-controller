@@ -937,9 +937,7 @@ switch:
       - switch.turn_off: auger_1_sw        
       - script.execute: sc_stop_all_smoking
       - lambda: id(status_msg).publish_state("Turned OFF"); 
-      #this always runs if go is turned off. its probably why they turn off randomly. better to check on_turn_off in sw gpio
-      # - delay: 600s
-      - switch.turn_off: fans_on_off_sw
+      - script.execute: sc_shutdown
 #
   - platform: template
     optimistic: true
@@ -977,27 +975,7 @@ switch:
             ESP_LOGD("Fans ON: RTD Probe", "RTD Temp: %.3f", id(rtd_temperature_f).state);        
     on_turn_off:
       - lambda: |-
-            ESP_LOGD("Fans OFF: RTD Probe", "RTD Temp: %.3f", id(rtd_temperature_f).state);        
-      - if:
-          condition: # grill is still hot
-            lambda: |-
-              float temp = id(rtd_temperature_f).state;
-              ESP_LOGD("Fan Control", "Checking temp %.1f against threshold 175.0", temp);
-              return !isnan(temp) && temp > 175.0;
-          then:
-            - script.execute: sc_shutdown
-            - switch.turn_on: fans_on_off_sw        
-            - lambda: id(status_msg).publish_state("Grill is Hot-Fan ON");
-            - delay: 1s
-            - lambda: |-
-                      id(fans_on_off_sw)->publish_state(true);             
-          else:  
-            - script.stop: sc_shutdown
-            - switch.turn_off: fans_on_off_sw
-            - lambda: id(status_msg).publish_state("Fan OFF @ < 175F");
-            - delay: 1s
-            - lambda: |-
-                id(fans_on_off_sw)->publish_state(false);
+            ESP_LOGD("Fans OFF: RTD Probe", "RTD Temp: %.3f", id(rtd_temperature_f).state);
 
   - platform: gpio
     pin: GPIO12
@@ -1658,22 +1636,19 @@ script:
   - id: sc_shutdown
     mode: single
     then:
-      - switch.turn_on: fans_on_off_sw
-      - delay: 1200s  # Wait 10 minutes before next check
-      - if:
-          condition: # grill is still hot
+      - while:
+          condition:
             lambda: |-
               float temp = id(rtd_temperature_f).state;
               ESP_LOGD("Fan Control", "Checking temp %.1f against threshold 175.0", temp);
               return !isnan(temp) && temp > 175.0;
-          then:        
-            - logger.log: "Smoker is still hot, turning on fans"
-            - switch.turn_on: fans_on_off_sw        
-            - script.execute: sc_shutdown
-          else:
-            - logger.log: "Smoker is now cool, turning off fans"
-            - switch.turn_off: fans_on_off_sw
-            - script.stop: sc_shutdown
+          then:
+            - switch.turn_on: fans_on_off_sw
+            - lambda: id(status_msg).publish_state("Cooling down - Fan ON");
+            - delay: 1200s
+      - switch.turn_off: fans_on_off_sw
+      - lambda: id(status_msg).publish_state("Fan OFF @ < 175F");
+      - logger.log: "Smoker is now cool, turning off fans"
 
       # - while:
       #     condition:
