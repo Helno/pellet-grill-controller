@@ -104,6 +104,7 @@ spi:
 display:
   - platform: ili9xxx
     id: mydisplay
+    setup_priority: -200
     spi_id: spi_bus
     data_rate: 20MHz
     model: ILI9488_A #TFT 3.5  
