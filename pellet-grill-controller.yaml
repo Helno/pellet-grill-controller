@@ -358,7 +358,7 @@ display:
         }
 
           // Probe temps (bottom-left of BBQ body)
-          it.filled_rectangle(0, 294, 130, 158, black);
+          it.filled_rectangle(1, 294, 128, 149, black);
           bool p1_conn = id(a0_voltage).state > 0.2f;
           bool p2_conn = id(a1_voltage).state > 0.2f;
           if (p1_conn && p2_conn) {
