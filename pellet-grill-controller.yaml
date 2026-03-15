@@ -68,7 +68,7 @@ esp32:
 api:
   reboot_timeout: 24h
 logger:
-    level: VERBOSE
+    level: DEBUG
     logs:
       component: none   # screen spam updates suppressed
       api.connection: ERROR
@@ -81,7 +81,7 @@ logger:
       FT63X6: ERROR
       spi: ERROR
       touchscreen: ERROR
-      I2C: VERBOSE
+      I2C: ERROR
 
 ota:
   - platform: esphome
@@ -106,7 +106,7 @@ display:
     id: mydisplay
     setup_priority: -200
     spi_id: spi_bus
-    data_rate: 20MHz
+    data_rate: 40MHz
     model: ILI9488_A #TFT 3.5  
     dc_pin: GPIO5    
     cs_pin: GPIO7 
@@ -114,7 +114,7 @@ display:
     color_palette: 8BIT
     #LED - jumper to VCC so it is always on
     rotation: 90
-    update_interval: 0.5s
+    update_interval: 0.1s
     invert_colors: true
     show_test_card: false
     lambda: |-
@@ -163,11 +163,16 @@ display:
          it.filled_rectangle(219, 42, 3, 58, Color(120, 120, 120)); // Left highlight
          it.filled_rectangle(264, 42, 3, 58, Color(40, 40, 40));    // Right shadow
        }
-       it.printf(77, 118, id(font20), white, TextAlign::TOP_CENTER, "Set Temp");
-       it.printf(77, 140, id(font45), white, TextAlign::TOP_CENTER, "%.0f°", id(smoker_set_temp).state);
+       if (id(smoke_mode).state) {
+         it.printf(77, 118, id(font20), white, TextAlign::TOP_CENTER, "P Select");
+         it.printf(77, 140, id(font45), white, TextAlign::TOP_CENTER, "%s", id(p_select).current_option().c_str());
+       } else {
+         it.printf(77, 118, id(font20), white, TextAlign::TOP_CENTER, "Set Temp");
+         it.printf(77, 140, id(font45), white, TextAlign::TOP_CENTER, "%.0f°", id(smoker_set_temp).state);
+       }
 
-       it.printf(243, 118, id(font20), white, TextAlign::TOP_CENTER, "RTD Temp");
-       it.printf(289, 140, id(font45), white, TextAlign::TOP_RIGHT, "%.0f°", id(rtd_temperature_f).state);
+       it.printf(243, 118, id(font20), red, TextAlign::TOP_CENTER, "RTD Temp");
+       it.printf(289, 140, id(font45), red, TextAlign::TOP_RIGHT, "%.0f°", id(rtd_temperature_f).state);
 
         // Temperature graph (y=200 to y=283, full width)
         {
@@ -212,6 +217,32 @@ display:
               int ry1 = gy + gh - (int)((rv1 - y_min) / y_range * gh);
               int ry2 = gy + gh - (int)((rv2 - y_min) / y_range * gh);
               it.line(x1, ry1, x2, ry2, red);
+
+              // Probe 1 - green (only when connected)
+              if ((int)id(graph_probe1_temp).size() > i) {
+                float p1v1 = id(graph_probe1_temp)[i-1];
+                float p1v2 = id(graph_probe1_temp)[i];
+                if (!isnan(p1v1) && !isnan(p1v2)) {
+                  p1v1 = std::max(y_min, std::min(y_max, p1v1));
+                  p1v2 = std::max(y_min, std::min(y_max, p1v2));
+                  int p1y1 = gy + gh - (int)((p1v1 - y_min) / y_range * gh);
+                  int p1y2 = gy + gh - (int)((p1v2 - y_min) / y_range * gh);
+                  it.line(x1, p1y1, x2, p1y2, Color(0, 220, 0));
+                }
+              }
+
+              // Probe 2 - yellow (only when connected)
+              if ((int)id(graph_probe2_temp).size() > i) {
+                float p2v1 = id(graph_probe2_temp)[i-1];
+                float p2v2 = id(graph_probe2_temp)[i];
+                if (!isnan(p2v1) && !isnan(p2v2)) {
+                  p2v1 = std::max(y_min, std::min(y_max, p2v1));
+                  p2v2 = std::max(y_min, std::min(y_max, p2v2));
+                  int p2y1 = gy + gh - (int)((p2v1 - y_min) / y_range * gh);
+                  int p2y2 = gy + gh - (int)((p2v2 - y_min) / y_range * gh);
+                  it.line(x1, p2y1, x2, p2y2, Color(255, 200, 0));
+                }
+              }
             }
           }
 
@@ -326,9 +357,25 @@ display:
           }
         }
 
-          // Display P-select value
-          it.printf(65, 294, id(font30), white, TextAlign::TOP_CENTER, "Smoker");
-          it.printf(65, 350, id(font50), red, TextAlign::TOP_CENTER, "%s", id(p_select).state.c_str());
+          // Probe temps (bottom-left of BBQ body)
+          it.filled_rectangle(0, 294, 130, 158, black);
+          bool p1_conn = id(a0_voltage).state > 0.2f;
+          bool p2_conn = id(a1_voltage).state > 0.2f;
+          if (p1_conn && p2_conn) {
+            // Two probes - stacked compact layout
+            it.printf(65, 304, id(font20), Color(0, 220, 0), TextAlign::TOP_CENTER, "P1");
+            it.printf(65, 326, id(font40), Color(0, 220, 0), TextAlign::TOP_CENTER, "%.0f°", id(a0_temperature).state);
+            it.printf(65, 378, id(font20), Color(255, 200, 0), TextAlign::TOP_CENTER, "P2");
+            it.printf(65, 400, id(font40), Color(255, 200, 0), TextAlign::TOP_CENTER, "%.0f°", id(a1_temperature).state);
+          } else if (p1_conn) {
+            // Single probe - large centered
+            it.printf(65, 330, id(font20), Color(0, 220, 0), TextAlign::TOP_CENTER, "P1");
+            it.printf(65, 354, id(font45), Color(0, 220, 0), TextAlign::TOP_CENTER, "%.0f°", id(a0_temperature).state);
+          } else if (p2_conn) {
+            // Single probe - large centered
+            it.printf(65, 330, id(font20), Color(255, 200, 0), TextAlign::TOP_CENTER, "P2");
+            it.printf(65, 354, id(font45), Color(255, 200, 0), TextAlign::TOP_CENTER, "%.0f°", id(a1_temperature).state);
+          }
 
           // Pellet hopper graphic - shifted left
           {
@@ -454,6 +501,14 @@ globals:
     type: float
     restore_value: no
     initial_value: '450.0'
+
+  - id: graph_probe1_temp
+    type: std::vector<float>
+    restore_value: no
+
+  - id: graph_probe2_temp
+    type: std::vector<float>
+    restore_value: no
 
 select:         
   - platform: template
@@ -587,66 +642,58 @@ sensor:
 
 
       
-# ############## ADC1_A0 ##############
-#   - platform: template
-#     name: "A0 Thermistor Resistance"
-#     unit_of_measurement: "Ω"
-#     update_interval: never
-#     id: a0_thermistor_resistance
+############## ADC1_A0 ##############
+  - platform: template
+    name: "A0 Thermistor Resistance"
+    unit_of_measurement: "Ω"
+    update_interval: never
+    id: a0_thermistor_resistance
 
-#   - platform: template
-#     name: "A0 Temperature"
-#     id: a0_temperature  
-#     unit_of_measurement: "°F"
-#     accuracy_decimals: 2
-#     update_interval: never
-#     filters:
-#       - offset: -10 #negative makes it colder
+  - platform: template
+    name: "A0 Temperature"
+    id: a0_temperature
+    unit_of_measurement: "°F"
+    accuracy_decimals: 2
+    update_interval: never
 
-#   - platform: ads1115
-#     multiplexer: 'A0_GND'
-#     name: "A0 ADS1115 to GND"
-#     ads1115_id: ads1115_48
-#     id: A0_voltage
-#     unit_of_measurement: "V"
-#     accuracy_decimals: 4
-#     update_interval: 1.5s
-#     gain: 4.096  # measures up to 6.144v
-#     filters:
-#       median: 
-#         window_size: 5
-#         send_every: 1
-#     on_value:
-#       then:
-#         - lambda: |-
-#             // Calculate thermistor resistance
-#             const float Vcc = 5.036;        // Supply voltage (adjust if 5V)
-#             const float R_1 = 1036;  // Fixed resistor - increase to raise temperature
-#             float Vout = id(A0_voltage).state;
-#             float R_thermistor = 0;
-            
-#             if (Vout > 0) {  // Avoid division by zero
-#               R_thermistor = (Vout * R_1 ) / (Vcc - Vout);
-#               //(148600 * (4.971-2.595)) / 2.595 
-#             }
-            
-#             // Calculate temperature using Steinhart-Hart equation
-#             //RTD PROBE
-#             float temperature = 0;
-#             if (R_thermistor > 0) {
-#               const float A =  9.7185046042e-02;
-#               const float B = -1.8291349510e-02;
-#               const float C =  9.9846598474e-05;
-              
-#               float lnR = log(R_thermistor);
-#               float T_kelvin = 1.0 / (A + B * lnR + C * lnR * lnR * lnR);
-#               float T_celsius = T_kelvin - 273.15;
-#               temperature = (T_celsius * 9.0 / 5.0) + 32.0;  // Convert to Fahrenheit
-#             }
-            
-#             // Publish values to the sensors
-#             id(a0_thermistor_resistance).publish_state(R_thermistor);
-#             id(a0_temperature).publish_state(temperature);
+  - platform: ads1115
+    multiplexer: 'A0_GND'
+    name: "A0 ADS1115 to GND"
+    ads1115_id: ads1115_48
+    id: a0_voltage
+    unit_of_measurement: "V"
+    accuracy_decimals: 4
+    update_interval: 5s
+    gain: 6.144
+    filters:
+      median:
+        window_size: 7
+        send_every: 1
+    on_value:
+      then:
+        - lambda: |-
+            // Calculate thermistor resistance
+            const float Vcc = 3.31;       // Supply voltage (measured)
+            const float R_1 = 1000;    // Fixed resistor (1kΩ)
+            float Vout = id(a0_voltage).state;
+            float R_thermistor = 0;
+
+            if (Vout > 0) {
+              R_thermistor = R_1 * (Vcc - Vout) / Vout;
+            }
+
+            // Linear calibration from ice bath / boiling water measurements
+            float temperature = 0;
+            if (R_thermistor > 0) {
+              const float R_at_0C  = 1017.3;
+              const float slope    = 3.779;  // Ω/°C
+              float T_celsius = (R_thermistor - R_at_0C) / slope;
+              temperature = (T_celsius * 9.0 / 5.0) + 32.0;
+            }
+
+            // Publish values to the sensors
+            id(a0_thermistor_resistance).publish_state(R_thermistor);
+            id(a0_temperature).publish_state(temperature);
 
 ############## ADC1_A1 ##############
   - platform: template
@@ -669,7 +716,7 @@ sensor:
     id: a1_voltage
     unit_of_measurement: "V"
     accuracy_decimals: 4
-    update_interval: 2s
+    update_interval: 5s
     gain: 6.144  # measures up to 6.144v
     filters:
       median: 
@@ -679,152 +726,73 @@ sensor:
       then:
         - lambda: |-
             // Calculate thermistor resistance
-            const float Vcc = 5.1;        // Supply voltage (adjust if 5V)
-            const float R_1 = 148600;  // Fixed resistor (1kΩ, adjust if different)
+            const float Vcc = 3.31;       // Supply voltage (measured)
+            const float R_1 = 1000;    // Fixed resistor (1kΩ)
             float Vout = id(a1_voltage).state;
             float R_thermistor = 0;
             
             if (Vout > 0) {  // Avoid division by zero
-              R_thermistor = (Vout * R_1 ) / (Vcc - Vout);
+              R_thermistor = R_1 * (Vcc - Vout) / Vout;
               //(148600 * (4.971-2.595)) / 2.595 
             }
             
-            // Calculate temperature using Steinhart-Hart equation
-            //THERMOWORKS PRO TEMP PROBE
+            // Linear calibration from ice bath / boiling water measurements
             float temperature = 0;
             if (R_thermistor > 0) {
-              const float A = .00086732282163;
-              const float B = .00019645922453;
-              const float C = .0000001484424132;
-              
-              float lnR = log(R_thermistor);
-              float T_kelvin = 1.0 / (A + B * lnR + C * lnR * lnR * lnR);
-              float T_celsius = T_kelvin - 273.15;
-              temperature = (T_celsius * 9.0 / 5.0) + 32.0;  // Convert to Fahrenheit
+              const float R_at_0C  = 1005.6;
+              const float slope    = 3.760;  // Ω/°C
+              float T_celsius = (R_thermistor - R_at_0C) / slope;
+              temperature = (T_celsius * 9.0 / 5.0) + 32.0;
             }
-            
+
             // Publish values to the sensors
             id(a1_thermistor_resistance).publish_state(R_thermistor);
             id(a1_temperature).publish_state(temperature);
 
 
-############## ADC1_A2 ##############
-  - platform: template
-    name: "A2 Thermistor Resistance"
-    unit_of_measurement: "Ω"
-    update_interval: never
-    id: a2_thermistor_resistance
+# ############## ADC1_A2 (disabled - 150kΩ resistor not replaced) ##############
+#   - platform: template
+#     name: "A2 Thermistor Resistance"
+#     unit_of_measurement: "Ω"
+#     update_interval: never
+#     id: a2_thermistor_resistance
+#
+#   - platform: template
+#     name: "A2 Temperature"
+#     id: a2_temperature
+#     unit_of_measurement: "°F"
+#     accuracy_decimals: 2
+#     update_interval: never
+#
+#   - platform: ads1115
+#     multiplexer: 'A2_GND'
+#     name: "A2 ADS1115 to GND"
+#     ads1115_id: ads1115_48
+#     id: a2_voltage
+#     update_interval: 5s
+#     gain: 6.144
 
-  - platform: template
-    name: "A2 Temperature"
-    id: a2_temperature  
-    unit_of_measurement: "°F"
-    accuracy_decimals: 2
-    update_interval: never
-
-  - platform: ads1115
-    multiplexer: 'A2_GND'
-    name: "A2 ADS1115 to GND"
-    ads1115_id: ads1115_48
-    id: a2_voltage
-    unit_of_measurement: "V"
-    accuracy_decimals: 4
-    update_interval: 2s
-    gain: 6.144  # measures up to 6.144v
-    filters:
-      median: 
-        window_size: 7
-        send_every: 1
-    on_value:
-      then:
-        - lambda: |-
-            // Calculate thermistor resistance
-            const float Vcc = 5.1;        // Supply voltage (adjust if 5V)
-            const float R_1 = 148600;  // Fixed resistor (1kΩ, adjust if different)
-            float Vout = id(a2_voltage).state;
-            float R_thermistor = 0;
-            
-            if (Vout > 0) {  // Avoid division by zero
-              R_thermistor = (Vout * R_1 ) / (Vcc - Vout);
-              //(148600 * (4.971-2.595)) / 2.595 
-            }
-            
-            // Calculate temperature using Steinhart-Hart equation
-            //THERMOWORKS PRO TEMP PROBE
-            float temperature = 0;
-            if (R_thermistor > 0) {
-              const float A = 0.00086732282163;
-              const float B = 0.00019645922453;
-              const float C = 0.0000001484424132;
-              
-              float lnR = log(R_thermistor);
-              float T_kelvin = 1.0 / (A + B * lnR + C * lnR * lnR * lnR);
-              float T_celsius = T_kelvin - 273.15;
-              temperature = (T_celsius * 9.0 / 5.0) + 32.0;  // Convert to Fahrenheit
-            }
-            
-            // Publish values to the sensors
-            id(a2_thermistor_resistance).publish_state(R_thermistor);
-            id(a2_temperature).publish_state(temperature);
-
-############## ADC1_A3 ##############
-  - platform: template
-    name: "A3 Thermistor Resistance"
-    unit_of_measurement: "Ω"
-    update_interval: never
-    id: a3_thermistor_resistance
-
-  - platform: template
-    name: "A3 Temperature"
-    id: a3_temperature  
-    unit_of_measurement: "°F"
-    accuracy_decimals: 2
-    update_interval: never
-
-  - platform: ads1115
-    multiplexer: 'A3_GND'
-    name: "A3 ADS1115 to GND"
-    id: a3_voltage
-    ads1115_id: ads1115_48
-    unit_of_measurement: "V"
-    accuracy_decimals: 4
-    update_interval: 2s
-    gain: 6.144  # measures up to 6.144v
-    filters:
-      median: 
-        window_size: 7
-        send_every: 1
-    on_value:
-      then:
-        - lambda: |-
-            // Calculate thermistor resistance
-            const float Vcc = 5.1;        // Supply voltage (adjust if 5V)
-            const float R_1 = 148600;  // Fixed resistor (1kΩ, adjust if different)
-            float Vout = id(a3_voltage).state;
-            float R_thermistor = 0;
-            
-            if (Vout > 0) {  // Avoid division by zero
-              R_thermistor = (Vout * R_1 ) / (Vcc - Vout);
-              //(148600 * (4.971-2.595)) / 2.595 
-            }
-            
-            // Calculate temperature using Steinhart-Hart equation
-            //THERMOWORKS PRO TEMP PROBE
-            float temperature = 0;
-            if (R_thermistor > 0) {
-              const float A = 0.00086732282163;
-              const float B = 0.00019645922453;
-              const float C = 0.0000001484424132;
-              
-              float lnR = log(R_thermistor);
-              float T_kelvin = 1.0 / (A + B * lnR + C * lnR * lnR * lnR);
-              float T_celsius = T_kelvin - 273.15;
-              temperature = (T_celsius * 9.0 / 5.0) + 32.0;  // Convert to Fahrenheit
-            }
-            
-            // Publish values to the sensors
-            id(a3_thermistor_resistance).publish_state(R_thermistor);
-            id(a3_temperature).publish_state(temperature);
+# ############## ADC1_A3 (disabled - 150kΩ resistor not replaced) ##############
+#   - platform: template
+#     name: "A3 Thermistor Resistance"
+#     unit_of_measurement: "Ω"
+#     update_interval: never
+#     id: a3_thermistor_resistance
+#
+#   - platform: template
+#     name: "A3 Temperature"
+#     id: a3_temperature
+#     unit_of_measurement: "°F"
+#     accuracy_decimals: 2
+#     update_interval: never
+#
+#   - platform: ads1115
+#     multiplexer: 'A3_GND'
+#     name: "A3 ADS1115 to GND"
+#     id: a3_voltage
+#     ads1115_id: ads1115_48
+#     update_interval: 5s
+#     gain: 6.144
 
   - platform: rotary_encoder
     name: "Rotary Encoder"
@@ -837,7 +805,7 @@ sensor:
     id: rotary
     on_clockwise:
         - lambda: |-
-            if (id(page_1_selected_option) == "temp_setting") {
+            if (!id(smoke_mode).state) {
               float current_temp = id(smoker_set_temp).state;
               float increment;
               if (current_temp <= 225) {
@@ -855,7 +823,7 @@ sensor:
               if (new_temp <= id(smoker_set_temp).traits.get_max_value()) {
                 id(smoker_set_temp).publish_state(new_temp);
               }
-            } else if (id(page_1_selected_option) == "p_setting") 
+            } else if (id(smoke_mode).state)
               {
                   // Adjust p_select
                   auto current_index = id(p_select).index_of(id(p_select).state);
@@ -864,10 +832,11 @@ sensor:
                     id(p_select).make_call().set_index(next_index).perform();
                   }
             }
+            id(mydisplay).update();
 
     on_anticlockwise:
         - lambda: |-
-            if (id(page_1_selected_option) == "temp_setting") {
+            if (!id(smoke_mode).state) {
               float current_temp = id(smoker_set_temp).state;
               float increment;
               if (current_temp <= 225) {
@@ -885,7 +854,7 @@ sensor:
               if (new_temp >= 140 && new_temp <= id(smoker_set_temp).traits.get_max_value()) {
                 id(smoker_set_temp).publish_state(new_temp);
               }
-            } else if (id(page_1_selected_option) == "p_setting") 
+            } else if (id(smoke_mode).state)
               {
                   // Adjust p_select
                   auto current_index = id(p_select).index_of(id(p_select).state);
@@ -894,6 +863,7 @@ sensor:
                     id(p_select).make_call().set_index(next_index).perform();
                    }
             }
+            id(mydisplay).update();
 
 button:
   - platform: restart #allows remote reset of tywe1s chip from home assistant or internally
@@ -999,26 +969,30 @@ binary_sensor:
       number: GPIO10
       mode:
         input: true
+        pullup: true
     name: "Power Button"
     filters:
       - invert:
-      - delayed_on_off: 50ms
+      - delayed_on: 10ms
     on_press:
       - switch.toggle: go
       - logger.log: "Power button pressed - toggling system"
+      - lambda: id(mydisplay).update();
 
   - platform: gpio
     pin:
       number: GPIO14
       mode:
         input: true
+        pullup: true
     name: "Smoke Mode Button"
     filters:
       - invert:
-      - delayed_on_off: 50ms
+      - delayed_on: 10ms
     on_press:
       - switch.toggle: smoke_mode
       - logger.log: "Smoke mode button pressed - toggling smoke mode"
+      - lambda: id(mydisplay).update();
 
 
   - platform: gpio
@@ -1026,13 +1000,14 @@ binary_sensor:
       number: GPIO38
       mode:
         input: true
+        pullup: true
     name: "Temperature Down"
     filters:
       - invert:
-      - delayed_on_off: 50ms
+      - delayed_on: 10ms
     on_press:
       - lambda: |-
-          if (id(page_1_selected_option) == "temp_setting") {
+          if (!id(smoke_mode).state) {
             float current_temp = id(smoker_set_temp).state;
             float increment;
             // Set increment based on current temperature
@@ -1051,7 +1026,7 @@ binary_sensor:
             if (new_temp >= 140 && new_temp <= id(smoker_set_temp).traits.get_max_value()) {
               id(smoker_set_temp).publish_state(new_temp);
             }
-          } else if (id(page_1_selected_option) == "p_setting") {
+          } else if (id(smoke_mode).state){
             // Adjust p_select
             auto current_index = id(p_select).index_of(id(p_select).state);
             if (current_index.has_value()) {
@@ -1060,19 +1035,21 @@ binary_sensor:
               id(p_select).make_call().set_index(next_index).perform();
             }
           }
+          id(mydisplay).update();
 
   - platform: gpio
     pin:
       number: GPIO45
       mode:
         input: true
+        pullup: true
     name: "Temperature Up"
     filters:
       - invert:
-      - delayed_on_off: 50ms
+      - delayed_on: 10ms
     on_press:
       - lambda: |-
-          if (id(page_1_selected_option) == "temp_setting") {
+          if (!id(smoke_mode).state) {
             float current_temp = id(smoker_set_temp).state;
             float increment;
             // Set increment based on current temperature
@@ -1091,7 +1068,7 @@ binary_sensor:
             if (new_temp >= 140 && new_temp <= id(smoker_set_temp).traits.get_max_value()) {
               id(smoker_set_temp).publish_state(new_temp);
             }
-          } else if (id(page_1_selected_option) == "p_setting") {
+          } else if (id(smoke_mode).state){
             // Adjust p_select
             auto current_index = id(p_select).index_of(id(p_select).state);
             if (current_index.has_value()) {
@@ -1099,6 +1076,7 @@ binary_sensor:
               id(p_select).make_call().set_index(next_index).perform();
             }
           }
+          id(mydisplay).update();
 
   - platform: touchscreen
     id: touch_key_POWER
@@ -1109,6 +1087,7 @@ binary_sensor:
     on_press:
       - logger.log: "POWER was touched"
       - switch.toggle: go
+      - lambda: id(mydisplay).update();
   - platform: touchscreen
     id: touch_key_SMOKE
     x_min: 205
@@ -1118,6 +1097,7 @@ binary_sensor:
     on_press:
       - logger.log: "SMOKE was touched"
       - switch.toggle: smoke_mode
+      - lambda: id(mydisplay).update();
 
   - platform: touchscreen
     id: touch_key_HOTROD_1
@@ -1128,6 +1108,7 @@ binary_sensor:
     on_press:
       - logger.log: "HotRod was touched"
       - switch.toggle: hotrod_1_sw
+      - lambda: id(mydisplay).update();
 
   - platform: gpio
     pin: 
@@ -1149,7 +1130,7 @@ binary_sensor:
                // Update status message & flag to indicate which value is being adjusted
                 id(status_msg).publish_state("     Toggling Adjustment section");
                 
-                if (id(page_1_selected_option) == "temp_setting") {
+                if (!id(smoke_mode).state) {
                   id(status_msg).publish_state("     Adjusting P Level");
                   id(page_1_selected_option) = "p_setting";
                 } 
@@ -1525,13 +1506,19 @@ interval:
           const int MAX_POINTS = 160; // 80 minutes at 30s intervals, 2px per point
           float set_t = id(smoker_set_temp).state;
           float rtd_t = id(rtd_temperature_f).state;
+          float p1_t = id(a0_voltage).state > 0.2f ? id(a0_temperature).state : NAN;
+          float p2_t = id(a1_voltage).state > 0.2f ? id(a1_temperature).state : NAN;
           id(graph_set_temp).push_back(set_t);
           id(graph_rtd_temp).push_back(rtd_t);
+          id(graph_probe1_temp).push_back(p1_t);
+          id(graph_probe2_temp).push_back(p2_t);
           if (id(graph_set_temp).size() > MAX_POINTS) {
             id(graph_set_temp).erase(id(graph_set_temp).begin());
             id(graph_rtd_temp).erase(id(graph_rtd_temp).begin());
+            id(graph_probe1_temp).erase(id(graph_probe1_temp).begin());
+            id(graph_probe2_temp).erase(id(graph_probe2_temp).begin());
           }
-          // Update y_max if setpoint exceeds current scale
+          // Update y_max if any temp exceeds current scale
           float new_max = 450.0f;
           for (float v : id(graph_set_temp)) if (v > new_max) new_max = v + 50.0f;
           for (float v : id(graph_rtd_temp)) if (v > new_max) new_max = v + 50.0f;
