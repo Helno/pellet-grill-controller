@@ -494,7 +494,7 @@ i2c:
 
 
 ads1115:
-  address: 0x48
+  address: 0x49
   id: ads1115_48
 
 sensor:  
