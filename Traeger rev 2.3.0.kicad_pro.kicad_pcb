@@ -1,7 +1,7 @@
 (kicad_pcb
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(general
 		(thickness 1.6)
 		(legacy_teardrops no)
@@ -9,41 +9,42 @@
 	(paper "A4")
 	(layers
 		(0 "F.Cu" signal)
-		(31 "B.Cu" signal)
-		(32 "B.Adhes" user "B.Adhesive")
-		(33 "F.Adhes" user "F.Adhesive")
-		(34 "B.Paste" user)
-		(35 "F.Paste" user)
-		(36 "B.SilkS" user "B.Silkscreen")
-		(37 "F.SilkS" user "F.Silkscreen")
-		(38 "B.Mask" user)
-		(39 "F.Mask" user)
-		(40 "Dwgs.User" user "User.Drawings")
-		(41 "Cmts.User" user "User.Comments")
-		(42 "Eco1.User" user "User.Eco1")
-		(43 "Eco2.User" user "User.Eco2")
-		(44 "Edge.Cuts" user)
-		(45 "Margin" user)
-		(46 "B.CrtYd" user "B.Courtyard")
-		(47 "F.CrtYd" user "F.Courtyard")
-		(48 "B.Fab" user)
-		(49 "F.Fab" user)
-		(50 "User.1" user)
-		(51 "User.2" user)
-		(52 "User.3" user)
-		(53 "User.4" user)
-		(54 "User.5" user)
-		(55 "User.6" user)
-		(56 "User.7" user)
-		(57 "User.8" user)
-		(58 "User.9" user)
+		(2 "B.Cu" signal)
+		(9 "F.Adhes" user "F.Adhesive")
+		(11 "B.Adhes" user "B.Adhesive")
+		(13 "F.Paste" user)
+		(15 "B.Paste" user)
+		(5 "F.SilkS" user "F.Silkscreen")
+		(7 "B.SilkS" user "B.Silkscreen")
+		(1 "F.Mask" user)
+		(3 "B.Mask" user)
+		(17 "Dwgs.User" user "User.Drawings")
+		(19 "Cmts.User" user "User.Comments")
+		(21 "Eco1.User" user "User.Eco1")
+		(23 "Eco2.User" user "User.Eco2")
+		(25 "Edge.Cuts" user)
+		(27 "Margin" user)
+		(31 "F.CrtYd" user "F.Courtyard")
+		(29 "B.CrtYd" user "B.Courtyard")
+		(35 "F.Fab" user)
+		(33 "B.Fab" user)
+		(39 "User.1" user)
+		(41 "User.2" user)
+		(43 "User.3" user)
+		(45 "User.4" user)
+		(47 "User.5" user)
+		(49 "User.6" user)
+		(51 "User.7" user)
+		(53 "User.8" user)
+		(55 "User.9" user)
 	)
 	(setup
 		(pad_to_mask_clearance 0)
 		(allow_soldermask_bridges_in_footprints no)
+		(tenting front back)
 		(pcbplotparams
-			(layerselection 0x00010fc_ffffffff)
-			(plot_on_all_layers_selection 0x0000000_00000000)
+			(layerselection 0x00000000_00000000_55555555_5755f5ff)
+			(plot_on_all_layers_selection 0x00000000_00000000_00000000_00000000)
 			(disableapertmacros no)
 			(usegerberextensions no)
 			(usegerberattributes yes)
@@ -53,7 +54,6 @@
 			(dashed_line_gap_ratio 3.000000)
 			(svgprecision 4)
 			(plotframeref no)
-			(viasonmask no)
 			(mode 1)
 			(useauxorigin no)
 			(hpglpennumber 1)
@@ -61,16 +61,19 @@
 			(hpglpendiameter 15.000000)
 			(pdf_front_fp_property_popups yes)
 			(pdf_back_fp_property_popups yes)
+			(pdf_metadata yes)
+			(pdf_single_document no)
 			(dxfpolygonmode yes)
 			(dxfimperialunits yes)
 			(dxfusepcbnewfont yes)
 			(psnegative no)
 			(psa4output no)
-			(plotreference yes)
-			(plotvalue yes)
-			(plotfptext yes)
-			(plotinvisibletext no)
+			(plot_black_and_white yes)
 			(sketchpadsonfab no)
+			(plotpadnumbers no)
+			(hidednponfab no)
+			(sketchdnponfab yes)
+			(crossoutdnponfab yes)
 			(subtractmaskfromsilk no)
 			(outputformat 1)
 			(mirror no)
@@ -172,20 +175,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "f87018d5-f35f-4128-bfde-506f0c9de5f2")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -213,8 +203,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/62c7b44c-9591-40c8-839e-0000099d0b9b")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 0.54 -1.37)
@@ -407,6 +397,7 @@
 			(pintype "passive")
 			(uuid "b51466f1-310e-4165-92f1-30acfc01b465")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -447,20 +438,7 @@
 				)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "8c4e4147-1bf1-447e-ae79-29bfa2024d23")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -488,8 +466,8 @@
 		)
 		(property ki_fp_filters "MountingHole*")
 		(path "/3bab2cd1-e132-467b-a666-5a8b173a920c")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr exclude_from_pos_files)
 		(fp_circle
 			(center 0 0)
@@ -498,7 +476,7 @@
 				(width 0.15)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "Cmts.User")
 			(uuid "4d5c5618-48e8-402d-8798-fa1fbb6f2b05")
 		)
@@ -509,7 +487,7 @@
 				(width 0.05)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "f346d1a6-e5c4-45fa-bf9a-3176fa2f8d57")
 		)
@@ -531,6 +509,7 @@
 			(layers "*.Cu" "*.Mask")
 			(uuid "8d759265-301f-48d8-8ed5-95ec90b6b9f2")
 		)
+		(embedded_fonts no)
 	)
 	(footprint "Fuse:Fuse Block 3544-2_KEYSTONE"
 		(layer "F.Cu")
@@ -538,7 +517,7 @@
 		(at 112.81 61.658 -90)
 		(tags "3544-2 ")
 		(property "Reference" "F1"
-			(at -0.97 1.8 -90)
+			(at -0.97 1.8 270)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "d5d9ccc4-646d-443f-872c-87261ccd8fcf")
@@ -550,7 +529,7 @@
 			)
 		)
 		(property "Value" "15A Mains"
-			(at 5.846001 1.39 -90)
+			(at 5.846001 1.39 270)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "5b5e4f0d-e5a6-423b-be33-071c197215df")
@@ -561,19 +540,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Fuse:Fuse Block 3544-2_KEYSTONE"
-			(at 0 0 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "6c2004d1-60c0-4a37-b640-078c8eed7fc5")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -599,8 +566,8 @@
 		)
 		(property ki_fp_filters "*Fuse*")
 		(path "/6ff59340-4cc2-4b37-a56a-9339f5909e8e")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -2.2705 2.8518)
@@ -729,12 +696,12 @@
 				(width 0.508)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "b4c5d6ba-1967-4076-b723-f1ab4288875d")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 1.68 1.35 -90)
+			(at 1.68 1.35 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "1fd4d4b3-a368-4e6d-a0c9-0cf53f1ba624")
@@ -758,7 +725,7 @@
 				(max_length 1)
 				(best_width_ratio 1)
 				(max_width 2)
-				(curve_points 0)
+				(curved_edges no)
 				(filter_ratio 0.9)
 				(enabled yes)
 				(allow_two_segments yes)
@@ -796,6 +763,7 @@
 			(pintype "passive")
 			(uuid "32d259c5-d862-42ac-92cf-2518055084b9")
 		)
+		(embedded_fonts no)
 	)
 	(footprint "LED_THT:LED_D3.0mm"
 		(layer "F.Cu")
@@ -825,19 +793,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D3.0mm"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "90c08605-ac2d-4f5a-9385-7559c96bc4bb")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -863,8 +819,8 @@
 		)
 		(property ki_fp_filters "LED* LED_SMD:* LED_THT:*")
 		(path "/cd3c1b04-04a1-4d0f-986f-25f269a6f293")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -0.29 -1.236)
@@ -998,7 +954,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "16c369c3-cb6f-4eae-b336-e74da201132c")
 		)
@@ -1035,6 +991,7 @@
 			(pintype "passive")
 			(uuid "25a1f974-50a9-429d-8178-7e9ea179890d")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/LED_THT.3dshapes/LED_D3.0mm.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -1075,19 +1032,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D3.0mm"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1dd1e707-cbaf-47ff-a593-fdecc27ebad0")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -1113,8 +1058,8 @@
 		)
 		(property ki_fp_filters "LED* LED_SMD:* LED_THT:*")
 		(path "/be8eb7c8-e721-4727-be2f-dadb348be31f")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -0.29 -1.236)
@@ -1248,7 +1193,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "915c1e6e-9e02-49ff-9f8d-2403f4c2a90f")
 		)
@@ -1285,6 +1230,7 @@
 			(pintype "passive")
 			(uuid "69ecda9f-8488-48da-be77-44991e3448d5")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/LED_THT.3dshapes/LED_D3.0mm.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -1325,20 +1271,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "2e10cc5b-7779-4ebc-9408-9256e06ba550")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1366,8 +1299,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/bb021f65-5ca9-4698-ab9d-ba328e7a718e")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 7.08 1.37)
@@ -1549,6 +1482,7 @@
 			(pintype "passive")
 			(uuid "f800e4a6-d162-40b9-9ebf-33a9b23832ce")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -1590,20 +1524,7 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock_RND:TerminalBlock_RND_205-00014_1x04_P5.00mm_Horizontal"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "6faa19a8-c59c-4f85-afe6-8385ec888649")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1631,8 +1552,8 @@
 		)
 		(property ki_fp_filters "TerminalBlock*:*")
 		(path "/b7087feb-25a2-4a09-b2bc-efec99641712")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 17.561 -4.16)
@@ -1906,7 +1827,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "3ca704fb-a279-40f3-b050-f5548532979c")
 		)
@@ -1917,7 +1838,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "29cc3951-e14b-451b-9396-862027a41002")
 		)
@@ -1928,7 +1849,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "10d1eb4e-7302-4d89-a0b9-d41295a9c381")
 		)
@@ -1939,7 +1860,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "184faa5f-2e7c-4afe-ace1-5fad944f9a66")
 		)
@@ -1950,7 +1871,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "67de54d9-e76a-44e2-8f6a-c40a207992e5")
 		)
@@ -1961,7 +1882,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "504e147c-6f34-4507-960e-2d14dd050a7f")
 		)
@@ -1972,7 +1893,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "d8c2e768-8199-4c4b-bf88-566227a94424")
 		)
@@ -2183,7 +2104,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "c4a2b41d-9fad-445b-81b9-dc1d655141b4")
 		)
@@ -2194,7 +2115,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "69968205-e2e8-42f3-940a-eef2f93d60f9")
 		)
@@ -2205,7 +2126,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "d21d7ba4-4023-48f2-aaf2-b571f2e2de99")
 		)
@@ -2216,7 +2137,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "b38cc181-d49c-4f81-ab1c-3113206392e0")
 		)
@@ -2227,7 +2148,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "4f67b8f5-fd3c-47b1-9ff6-ac6fa9c60bab")
 		)
@@ -2238,7 +2159,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "6055af52-8956-4a12-88f9-234e327b0d4b")
 		)
@@ -2249,7 +2170,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "89a0d8b6-3847-43ff-8c37-606f0f51254e")
 		)
@@ -2260,7 +2181,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "7fc1250e-bd4b-4a7e-ab9d-df5a0dee610f")
 		)
@@ -2281,7 +2202,7 @@
 			(drill 1.3)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 41 "VCC")
+			(net 25 "3V3")
 			(pinfunction "Pin_2")
 			(pintype "passive")
 			(uuid "118d6f14-45a7-4e94-afeb-42d8f61dd778")
@@ -2303,11 +2224,12 @@
 			(drill 1.3)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 41 "VCC")
+			(net 25 "3V3")
 			(pinfunction "Pin_4")
 			(pintype "passive")
 			(uuid "6c995e5d-f642-4c5c-8e80-dc5276dba8ec")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/TerminalBlock_RND.3dshapes/TerminalBlock_RND_205-00014_1x04_P5.00mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -2348,18 +2270,6 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Espressif:ESP32-S3-DevKitC"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "cd097859-2928-4099-a7a9-89c0f6d2bffc")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -2385,8 +2295,8 @@
 			)
 		)
 		(path "/f99740a0-304f-460d-8075-88a738405fa9")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -1.5 54.9)
@@ -3565,6 +3475,7 @@
 			(pintype "power_in")
 			(uuid "5ab26007-7566-434a-8132-43d08dc5d562")
 		)
+		(embedded_fonts no)
 	)
 	(footprint "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 		(layer "F.Cu")
@@ -3594,20 +3505,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "aa31bfb7-eb1a-4dd5-bb11-c1b1952d83e7")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3635,8 +3533,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/c44e1288-d71b-427f-b426-7cef0783430c")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 0.54 -1.37)
@@ -3829,6 +3727,7 @@
 			(pintype "passive")
 			(uuid "071adc46-4b93-4296-975e-fa37bde86746")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -3869,20 +3768,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical"
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d69bdc67-c4de-47be-a32e-5c6d21dcab63")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3910,8 +3796,8 @@
 		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/493cd0c1-79c7-4eec-8dc2-e452e298b02b")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -1.6 -2.75)
@@ -4282,7 +4168,7 @@
 			(drill 0.95)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 41 "VCC")
+			(net 25 "3V3")
 			(pinfunction "Pin_2")
 			(pintype "passive")
 			(uuid "b918f5e7-9212-4be5-829b-9859d4fa7598")
@@ -4331,6 +4217,7 @@
 			(pintype "passive+no_connect")
 			(uuid "7c2dfc71-583b-44c7-9a18-2b2020522c31")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Connector_JST.3dshapes/JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -4371,20 +4258,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "9e1e3c92-5b8b-46f5-ba71-616f8011bdcd")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4412,8 +4286,8 @@
 		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/b659cc63-b5d2-4858-a8ce-68704e883aa5")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -2.85 -2.75)
@@ -4833,6 +4707,7 @@
 			(pintype "passive")
 			(uuid "9fddee7d-0a58-4532-88ad-48285291c51f")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Connector_JST.3dshapes/JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -4863,7 +4738,7 @@
 			)
 		)
 		(property "Value" "ADS1115 0x49"
-			(at -3.02 11.22 -90)
+			(at -3.02 11.22 270)
 			(layer "F.SilkS")
 			(uuid "44c0fd4b-3b28-440c-bd16-3f232a3bf25d")
 			(effects
@@ -4873,20 +4748,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x10_P2.54mm_Vertical"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "ea1bd2ce-afcb-4154-a066-fee67caf6d0b")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4914,8 +4776,8 @@
 		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/f4f4ac91-b472-4327-90ec-982fbcb30ee6")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -1.33 1.27)
@@ -5084,7 +4946,7 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 41 "VCC")
+			(net 25 "3V3")
 			(pinfunction "Pin_1")
 			(pintype "passive")
 			(uuid "cd3c68ce-cfd5-46e0-b845-5a975173ef35")
@@ -5128,7 +4990,7 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 41 "VCC")
+			(net 25 "3V3")
 			(pinfunction "Pin_5")
 			(pintype "passive")
 			(uuid "7aabb49b-1197-456c-ae01-0d0cb3b24dff")
@@ -5188,6 +5050,7 @@
 			(pintype "passive")
 			(uuid "d16683cf-faa5-42db-94ef-e54ec8037699")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x10_P2.54mm_Vertical.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -5215,25 +5078,13 @@
 				)
 			)
 		)
-		(property "Value" "Igniter 1 Relay"
+		(property "Value" "Igniter SSR - OMRON G3MC-202PL"
 			(at 7.13 3.76 0)
 			(layer "F.SilkS")
 			(uuid "f4a1e100-1a7c-445d-a50f-262e447cc162")
 			(effects
 				(font
 					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Footprint" "Relay_THT:RELAY_G3MB-202PDC5"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b6405a6a-84ca-4ad0-a9e7-1bd5967a805c")
-			(effects
-				(font
-					(size 1.27 1.27)
 					(thickness 0.15)
 				)
 			)
@@ -5315,8 +5166,8 @@
 			)
 		)
 		(path "/f68a98df-e0ed-4785-b584-cdf7833c1fb9")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -12.25 -2.75)
@@ -5365,7 +5216,7 @@
 				(width 0.2)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "5d74bfb9-cf73-42a1-a03a-9824aa941000")
 		)
@@ -5456,7 +5307,7 @@
 				(width 0.2)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "ebb1d409-cd2c-4d9e-9cdb-3ceee4be42e0")
 		)
@@ -5504,6 +5355,7 @@
 			(solder_mask_margin 0.102)
 			(uuid "b75cb049-9531-48e5-b8b8-6f0b6481e219")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Relay_THT.3dshapes/Relay_SPDT_Finder_34.51_Vertical.wrl"
 			(offset
 				(xyz -8.5 1.5 0)
@@ -5544,18 +5396,6 @@
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 0 0 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "40be46de-f773-408f-b920-279210296e83")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 90)
 			(layer "F.Fab")
@@ -5587,7 +5427,7 @@
 				(width 0.2032)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "59298d95-6396-4eb8-9f74-2b465366f1d0")
 		)
@@ -5598,7 +5438,7 @@
 				(width 2.032)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "B.CrtYd")
 			(uuid "29fd7a12-1156-4a50-81fd-c133026b1a29")
 		)
@@ -5609,7 +5449,7 @@
 				(width 2.032)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "41777d5b-d1cd-477e-801f-12771f3b2858")
 		)
@@ -5640,6 +5480,10 @@
 				(pads not_allowed)
 				(copperpour not_allowed)
 				(footprints allowed)
+			)
+			(placement
+				(enabled no)
+				(sheetname "")
 			)
 			(fill
 				(thermal_gap 0.5)
@@ -5686,6 +5530,10 @@
 				(copperpour not_allowed)
 				(footprints allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -5713,6 +5561,7 @@
 				)
 			)
 		)
+		(embedded_fonts no)
 	)
 	(footprint "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 		(layer "F.Cu")
@@ -5732,7 +5581,7 @@
 				)
 			)
 		)
-		(property "Value" "150k"
+		(property "Value" "1k"
 			(at 4.84 0.07 90)
 			(layer "F.SilkS")
 			(uuid "764b3d19-77c5-403c-9037-5f8fb56fd996")
@@ -5743,20 +5592,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d9be9a54-c97e-4a4c-accf-2aa904c2ec3a")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5784,8 +5620,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/3dec2663-d234-44f0-8d54-88ad3d32dd7e")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 7.08 -1.37)
@@ -5978,6 +5814,7 @@
 			(pintype "passive")
 			(uuid "3cae65ff-fb98-47af-b20b-aeb89f4a002f")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -6019,20 +5856,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1987f375-4720-4b60-a915-73f59a5a1da0")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -6060,8 +5884,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/abf89ac4-bc01-4e64-9ed7-c122f348b286")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 7.08 -1.37)
@@ -6254,6 +6078,7 @@
 			(pintype "passive")
 			(uuid "58adb817-3138-41c4-8408-273d93fde2ee")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -6294,19 +6119,6 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92L_Inline"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e7f683fa-a85f-42d0-8dbc-b53fcbc135ff")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/BC550-D.pdf"
 			(at 0 0 0)
 			(unlocked yes)
@@ -6335,8 +6147,8 @@
 		)
 		(property ki_fp_filters "TO?92*")
 		(path "/cdbdf40f-05a7-4b8e-8fae-c81b190bb208")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -0.75 1.7)
@@ -6475,6 +6287,7 @@
 			(pintype "passive")
 			(uuid "772493fe-fbf1-44bd-8256-2d2b521a202a")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-92L_Inline.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -6515,20 +6328,7 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock_RND:TerminalBlock_RND_205-00005_1x06_P5.00mm_Horizontal"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e5f4c1e7-e0c6-4acd-9070-3fa1bcab3f83")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -6556,8 +6356,8 @@
 		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/7928791c-1c9e-4c3e-93d9-c7ce83d8fe9b")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -2.8 2.56)
@@ -6891,7 +6691,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "0cefaec9-f683-4db3-a4cc-6c2d100d347a")
 		)
@@ -6902,7 +6702,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "d8c564b4-0928-414a-b170-324463f52056")
 		)
@@ -6913,7 +6713,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "cdd4f0ad-d564-4c8f-abfb-b51d032e54c6")
 		)
@@ -6924,7 +6724,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "db58e537-eb98-4c1f-b4db-c7b8a801a0a3")
 		)
@@ -6935,7 +6735,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "277fec99-4f76-4372-aeaa-ba43286d838a")
 		)
@@ -6946,7 +6746,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "2e02cc11-cc67-4cb0-9ba9-f3d0b3d8c2f4")
 		)
@@ -6957,7 +6757,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "61d312d7-c9b3-4b98-9e52-ca6014cbead1")
 		)
@@ -6968,7 +6768,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "c19e52c3-40aa-43be-a7d2-be11014080ac")
 		)
@@ -6979,7 +6779,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "4683e3f7-a23a-45e2-9534-5be4087f2809")
 		)
@@ -6990,7 +6790,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "4f286d9c-a197-483d-af8b-f589f2fc12dc")
 		)
@@ -7001,7 +6801,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "b8035ba9-2f03-40c1-bc78-ac0c43d7f66d")
 		)
@@ -7232,7 +7032,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "c769a24e-f638-498d-abee-48e80f0d09cb")
 		)
@@ -7243,7 +7043,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "c351e4aa-5941-402e-8c50-dc139210e7ce")
 		)
@@ -7254,7 +7054,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "55608ee9-b7dc-4fb5-8017-cce5ab0dc415")
 		)
@@ -7265,7 +7065,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "c2fab5e7-18d3-4776-8c3c-1252691f9231")
 		)
@@ -7276,7 +7076,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "73154dce-cd3f-4496-b984-e2c609133154")
 		)
@@ -7287,7 +7087,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "81e0ece0-1642-4c7c-ae74-44d8d8d78c37")
 		)
@@ -7298,7 +7098,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "08a49841-929e-4429-99b0-eba19b58621e")
 		)
@@ -7309,7 +7109,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "dcb6f0d9-8b0e-4f5d-8668-d749a436450f")
 		)
@@ -7320,7 +7120,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "8c5fc5bf-235d-4ca1-9d51-1daed8dd1d69")
 		)
@@ -7331,7 +7131,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "72f414c0-1f35-4eb3-b0d7-93f4f53b75f6")
 		)
@@ -7342,7 +7142,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "e6c16ccd-59d0-4db8-bba4-cad0dfee9358")
 		)
@@ -7353,7 +7153,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "4b4cfb9d-9fad-48bd-836f-8d5216e5d6ca")
 		)
@@ -7434,6 +7234,7 @@
 			(pintype "passive")
 			(uuid "8ac36f4a-6541-41d8-865c-9ed6e280bd35")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/TerminalBlock_RND.3dshapes/TerminalBlock_RND_205-00005_1x06_P5.00mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -7474,18 +7275,6 @@
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 0 0 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "250fdc53-2f36-4d6a-bd2f-271cffe34460")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 90)
 			(layer "F.Fab")
@@ -7517,7 +7306,7 @@
 				(width 0.2032)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "ec665abf-ab9b-4519-b451-279b96a64601")
 		)
@@ -7528,7 +7317,7 @@
 				(width 2.032)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "B.CrtYd")
 			(uuid "01e0d178-0271-4d5f-839d-619911bb45ff")
 		)
@@ -7539,7 +7328,7 @@
 				(width 2.032)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "d77db47e-309e-442d-b39f-967e488549a2")
 		)
@@ -7570,6 +7359,10 @@
 				(pads not_allowed)
 				(copperpour not_allowed)
 				(footprints allowed)
+			)
+			(placement
+				(enabled no)
+				(sheetname "")
 			)
 			(fill
 				(thermal_gap 0.5)
@@ -7616,6 +7409,10 @@
 				(copperpour not_allowed)
 				(footprints allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -7643,6 +7440,7 @@
 				)
 			)
 		)
+		(embedded_fonts no)
 	)
 	(footprint "Relay_THT:RELAY_G3MB-202PDC5"
 		(layer "F.Cu")
@@ -7659,25 +7457,13 @@
 				)
 			)
 		)
-		(property "Value" "Auger 1 Relay"
+		(property "Value" "Auger SSR - OMRON G3MC-202PL"
 			(at 7.08 3.87 0)
 			(layer "F.SilkS")
 			(uuid "482e4635-14c8-4dc2-8af6-d425699a2970")
 			(effects
 				(font
 					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Footprint" "Relay_THT:RELAY_G3MB-202PDC5"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "0064aac2-006d-4693-88b1-d79309118337")
-			(effects
-				(font
-					(size 1.27 1.27)
 					(thickness 0.15)
 				)
 			)
@@ -7759,8 +7545,8 @@
 			)
 		)
 		(path "/71ba531e-52af-43c5-a149-2957de425a49")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -12.25 -2.75)
@@ -7809,7 +7595,7 @@
 				(width 0.2)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "66190153-3f62-4fee-8a70-c25c42e816ad")
 		)
@@ -7900,7 +7686,7 @@
 				(width 0.2)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "4442efcb-555f-413c-9867-1d50eb639255")
 		)
@@ -7948,6 +7734,7 @@
 			(solder_mask_margin 0.102)
 			(uuid "003600df-a6dd-404e-b734-cf69432f6310")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Relay_THT.3dshapes/Relay_SPDT_Finder_34.51_Vertical.wrl"
 			(offset
 				(xyz -8.5 1.5 0)
@@ -7975,25 +7762,13 @@
 				)
 			)
 		)
-		(property "Value" "Fan Relay"
+		(property "Value" "Fan SSR - OMRON G3MC-202PL"
 			(at 8.08 3.65 0)
 			(layer "F.SilkS")
 			(uuid "cfc7b42e-00f5-4f9c-8b3e-1adb1fbb969f")
 			(effects
 				(font
 					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Footprint" "Relay_THT:RELAY_G3MB-202PDC5"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "7755e3d0-57d5-47df-9bf7-f5bc41d94e75")
-			(effects
-				(font
-					(size 1.27 1.27)
 					(thickness 0.15)
 				)
 			)
@@ -8075,8 +7850,8 @@
 			)
 		)
 		(path "/19fda410-f69b-4b04-b82b-9024b24f890f")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -12.25 -2.75)
@@ -8125,7 +7900,7 @@
 				(width 0.2)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "d56db651-ca17-4879-bade-8ef928456b4b")
 		)
@@ -8216,7 +7991,7 @@
 				(width 0.2)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "a755a888-2879-42d8-9b2c-bd9bdc2fb3e1")
 		)
@@ -8264,6 +8039,7 @@
 			(solder_mask_margin 0.102)
 			(uuid "a7e2998f-f098-4cd2-8087-0d26f58c7bd4")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Relay_THT.3dshapes/Relay_SPDT_Finder_34.51_Vertical.wrl"
 			(offset
 				(xyz -8.5 1.5 0)
@@ -8304,20 +8080,7 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock_RND:TerminalBlock_RND_205-00014_1x04_P5.00mm_Horizontal"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "4c5be24e-ee30-4d9d-93bf-fefeb11e8245")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -8345,8 +8108,8 @@
 		)
 		(property ki_fp_filters "TerminalBlock*:*")
 		(path "/f0b66778-dc4b-4a63-8c46-9708f104ec7e")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 17.561 -4.16)
@@ -8620,7 +8383,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "4e533ee9-53dc-4e28-b2f4-400f949b3d7c")
 		)
@@ -8631,7 +8394,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "ca22c8b8-a8c0-4608-b964-08b70935dd53")
 		)
@@ -8642,7 +8405,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "c60c1312-5930-4514-abce-4de97126bac5")
 		)
@@ -8653,7 +8416,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "0fe7bd3d-827f-4815-b82b-719c3541314a")
 		)
@@ -8664,7 +8427,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "add7ff2d-c6e1-4898-9e99-a050eced0403")
 		)
@@ -8675,7 +8438,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "bd118aa1-d52c-4b89-bb38-13c4cede513d")
 		)
@@ -8686,7 +8449,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "6d4d003e-7f8f-439f-a274-6cedf502f71e")
 		)
@@ -8897,7 +8660,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "be0f2bf6-3be2-458c-87ee-e208f78cfccd")
 		)
@@ -8908,7 +8671,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "a643c1f2-2897-4982-a2f4-5e8bc189c4ed")
 		)
@@ -8919,7 +8682,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "eef4b0cd-64be-4f78-b292-e33675ca874c")
 		)
@@ -8930,7 +8693,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "58d6f6ee-390e-49b3-aa8c-2a6a8ed77635")
 		)
@@ -8941,7 +8704,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "966d462e-556b-4389-bf79-73f2b2b4cb49")
 		)
@@ -8952,7 +8715,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "ea30177b-d597-40df-b616-a477510d7e81")
 		)
@@ -8963,7 +8726,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "057ffd85-024a-4f4c-8076-bf63802bc1d3")
 		)
@@ -8974,7 +8737,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "4fd79ca7-4f34-437b-a2db-49a80ef58a8e")
 		)
@@ -9006,7 +8769,7 @@
 			(drill 1.3)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 41 "VCC")
+			(net 25 "3V3")
 			(pinfunction "Pin_2")
 			(pintype "passive")
 			(uuid "34b611a0-01b0-43ef-a1c6-a5e23a639f1c")
@@ -9028,11 +8791,12 @@
 			(drill 1.3)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 41 "VCC")
+			(net 25 "3V3")
 			(pinfunction "Pin_4")
 			(pintype "passive")
 			(uuid "73c97c43-f82d-4d05-bdc1-111f064b04a3")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/TerminalBlock_RND.3dshapes/TerminalBlock_RND_205-00014_1x04_P5.00mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -9073,20 +8837,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "4749ab83-8af1-413e-b035-7ae1f45d568a")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9114,8 +8865,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/2158fd47-f77c-41a7-b04e-f4e81f2bac78")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 0.54 -1.37)
@@ -9308,6 +9059,7 @@
 			(pintype "passive")
 			(uuid "a99afff4-c4c4-482c-b9b3-a9bc2231cc3f")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -9349,20 +9101,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_EH_B6B-EH-A_1x06_P2.50mm_Vertical"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "da0774b7-2784-4aee-be68-2f08adafffd6")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9390,8 +9129,8 @@
 		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/7c26dc58-8765-4418-b49d-c364025d9f35")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -2.91 0.11)
@@ -9721,6 +9460,7 @@
 			(pintype "passive")
 			(uuid "ddca7dc6-236a-4126-8326-355a6ace4d19")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Connector_JST.3dshapes/JST_EH_B6B-EH-A_1x06_P2.50mm_Vertical.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -9761,19 +9501,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D3.0mm"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "386084df-02f5-484b-af6a-00bfddc0d61a")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -9799,8 +9527,8 @@
 		)
 		(property ki_fp_filters "LED* LED_SMD:* LED_THT:*")
 		(path "/10de209c-750e-4478-b0b9-9754b9485657")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -0.29 -1.236)
@@ -9934,7 +9662,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "f6c208ad-c40a-452e-9743-0321237a7bc9")
 		)
@@ -9971,6 +9699,7 @@
 			(pintype "passive")
 			(uuid "880b2cc9-9d42-4fee-b838-680b9e1064e5")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/LED_THT.3dshapes/LED_D3.0mm.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -10011,20 +9740,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "11e81679-aa77-4191-9da8-deb59152edc7")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -10052,8 +9768,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/b092c2b4-ffc9-4d81-ba23-00a9c235c169")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 0.54 -1.37)
@@ -10246,6 +9962,7 @@
 			(pintype "passive")
 			(uuid "6ced7d4c-fe28-4cfb-94ef-8035544edee3")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -10286,20 +10003,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b319fd81-3bbf-45e0-ae2f-ef574a859942")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -10327,8 +10031,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/bf7e08bf-6f0b-4f11-beff-92f41588f358")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 0.54 -1.37)
@@ -10521,6 +10225,7 @@
 			(pintype "passive")
 			(uuid "f47d29f0-915a-4bc2-acd5-4455ee9c5df9")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -10561,19 +10266,6 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92L_Inline"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "aed06fe0-ff7e-4aec-a99d-52ed92097dc0")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/BC550-D.pdf"
 			(at 0 0 0)
 			(unlocked yes)
@@ -10602,8 +10294,8 @@
 		)
 		(property ki_fp_filters "TO?92*")
 		(path "/020012fa-8a7b-4a50-9e5a-4a4c30250533")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -0.75 1.7)
@@ -10742,6 +10434,7 @@
 			(pintype "passive")
 			(uuid "d09d0363-abbb-46c6-82fa-900dbc9e387a")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-92L_Inline.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -10782,20 +10475,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "794fb128-711f-4571-8d40-5048003bad60")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -10823,8 +10503,8 @@
 		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/f130d1e9-7364-4359-a386-1d60d159f3eb")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole exclude_from_bom)
 		(fp_line
 			(start -1.33 1.27)
@@ -11075,6 +10755,7 @@
 			(pintype "passive+no_connect")
 			(uuid "f1428da7-2cdf-4ce1-bd8c-d0bff6fe1ddb")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x08_P2.54mm_Vertical.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -11116,21 +10797,8 @@
 				)
 			)
 		)
-		(property "Footprint" "Converter_ACDC:Converter_ACDC_Hi-Link_HLK-PMxx"
-			(at 0 0 -90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e4177c75-69df-4cad-9deb-151fc0629958")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" "https://h.hlktech.com/download/ACDC%E7%94%B5%E6%BA%90%E6%A8%A1%E5%9D%973W%E7%B3%BB%E5%88%97/1/%E6%B5%B7%E5%87%8C%E7%A7%913W%E7%B3%BB%E5%88%97%E7%94%B5%E6%BA%90%E6%A8%A1%E5%9D%97%E8%A7%84%E6%A0%BC%E4%B9%A6V2.8.pdf"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -11143,7 +10811,7 @@
 			)
 		)
 		(property "Description" "Compact AC/DC board mount power module 3W 5V"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -11157,8 +10825,8 @@
 		)
 		(property ki_fp_filters "Converter*ACDC*Hi?Link*HLK?PM*")
 		(path "/2ab6c037-aa96-44d4-958b-88d952196542")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -3.92 13.81)
@@ -11354,6 +11022,7 @@
 			(pintype "power_out")
 			(uuid "365e5592-1fa2-47f6-8b69-d9e8b1ec9a0d")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Converter_ACDC.3dshapes/Converter_ACDC_Hi-Link_HLK-PMxx.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -11394,19 +11063,6 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92L_Inline"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "2e79d6b1-32e3-40ce-90a3-7ed14ea3d604")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/BC550-D.pdf"
 			(at 0 0 0)
 			(unlocked yes)
@@ -11435,8 +11091,8 @@
 		)
 		(property ki_fp_filters "TO?92*")
 		(path "/88c04f8d-2e69-4d32-951e-814b691e85bc")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -0.75 1.7)
@@ -11575,6 +11231,7 @@
 			(pintype "passive")
 			(uuid "44910b84-4d3c-4913-8cde-c8746b370112")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-92L_Inline.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -11615,21 +11272,8 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 -90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "25ddfabd-8b6a-46b4-ac44-df0addc29db8")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 -90)
+		(property "Datasheet" "~"
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -11642,7 +11286,7 @@
 			)
 		)
 		(property "Description" "Standard 1/4W Axial Resistors."
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -11656,8 +11300,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/af8e7eab-691b-4457-a8a6-5b77ecf52b7b")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 0.54 1.37)
@@ -11850,6 +11494,7 @@
 			(pintype "passive")
 			(uuid "f89beb2a-e42b-4989-9f4e-4359dabf1a81")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -11890,20 +11535,7 @@
 				)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5b22380f-0609-4594-a421-aacc21840cb4")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -11931,8 +11563,8 @@
 		)
 		(property ki_fp_filters "MountingHole*")
 		(path "/3a413c98-748f-4cb8-8212-664e5c19146c")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr exclude_from_pos_files)
 		(fp_circle
 			(center 0 0)
@@ -11941,7 +11573,7 @@
 				(width 0.15)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "Cmts.User")
 			(uuid "0886a31f-2674-44ab-b79e-b938180ec929")
 		)
@@ -11952,7 +11584,7 @@
 				(width 0.05)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "ba319153-9813-4cce-9fb2-919281811dc2")
 		)
@@ -11974,6 +11606,7 @@
 			(layers "*.Cu" "*.Mask")
 			(uuid "131f268c-880a-4a1c-8ef9-cf6510b29c1f")
 		)
+		(embedded_fonts no)
 	)
 	(footprint "LED_THT:LED_D3.0mm"
 		(layer "F.Cu")
@@ -12004,19 +11637,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D3.0mm"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1b746bec-8c69-4aef-9e9f-81bd6424be5e")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -12042,8 +11663,8 @@
 		)
 		(property ki_fp_filters "LED* LED_SMD:* LED_THT:*")
 		(path "/f2402cf2-98a4-40e5-ae29-1f688fc6e412")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -0.29 -1.236)
@@ -12177,7 +11798,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "adc6c939-2b61-4f80-92b4-c8c3ffed07cf")
 		)
@@ -12214,6 +11835,7 @@
 			(pintype "passive")
 			(uuid "68ac8413-8bb1-4887-b15b-71df6e18c31a")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/LED_THT.3dshapes/LED_D3.0mm.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -12254,20 +11876,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "6948e75f-fbec-4f14-8caa-9a240db22e89")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12295,8 +11904,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/a3df929a-ebad-42db-8ea9-41597bbb258f")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 0.54 -1.37)
@@ -12489,6 +12098,7 @@
 			(pintype "passive")
 			(uuid "162d7136-0ac9-4cb1-96d7-3f92800a928b")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -12529,20 +12139,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b2a35e04-970c-4250-95f2-7a55675b47c4")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12570,8 +12167,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/e889a8d3-8375-419f-991e-df158fd529fc")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 0.54 -1.37)
@@ -12764,6 +12361,7 @@
 			(pintype "passive")
 			(uuid "c55e46a5-9a74-4302-9d30-93f4baa89e91")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -12805,20 +12403,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_EH_B8B-EH-A_1x08_P2.50mm_Vertical"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "6d33ee9b-3606-4fcb-ad68-3a4c8c38ee1e")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12846,8 +12431,8 @@
 		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/b6a3a093-c471-4fe7-9225-3a37437f1840")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -2.91 0.11)
@@ -13199,6 +12784,7 @@
 			(pintype "passive")
 			(uuid "a6983e35-c9f5-46d9-9b14-870ea3380d05")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Connector_JST.3dshapes/JST_EH_B8B-EH-A_1x08_P2.50mm_Vertical.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -13239,20 +12825,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_EH_B4B-EH-A_1x04_P2.50mm_Vertical"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d6d9fe19-2601-4bda-9aa0-ba9508b7c55a")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13280,8 +12853,8 @@
 		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/de660709-05c3-481e-a690-58d9c2aa5c3d")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -2.91 0.11)
@@ -13589,6 +13162,7 @@
 			(pintype "passive")
 			(uuid "5de1996b-e04d-4076-a4cf-9a5fce767791")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Connector_JST.3dshapes/JST_EH_B4B-EH-A_1x04_P2.50mm_Vertical.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -13629,20 +13203,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "80374b30-838e-4fbe-9801-45dc7f766410")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13670,8 +13231,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/52284650-bc38-42a4-9c33-73e8dfbda401")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 0.54 -1.37)
@@ -13864,6 +13425,7 @@
 			(pintype "passive")
 			(uuid "8b91ad7a-800a-4a43-80a1-7275fb9ed607")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -13905,20 +13467,7 @@
 				)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "0b73e564-2eb7-4d97-b4f3-f4765a17fc04")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13946,8 +13495,8 @@
 		)
 		(property ki_fp_filters "MountingHole*")
 		(path "/f2b53576-0f01-4b9f-8704-3a3b37e1df5e")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr exclude_from_pos_files)
 		(fp_circle
 			(center 0 0)
@@ -13956,7 +13505,7 @@
 				(width 0.15)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "Cmts.User")
 			(uuid "2d8dba3a-8248-467d-8850-f8a1277294d0")
 		)
@@ -13967,7 +13516,7 @@
 				(width 0.05)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "d2bc01bd-8c12-441d-97b9-2b5a476d5596")
 		)
@@ -13989,6 +13538,7 @@
 			(layers "*.Cu" "*.Mask")
 			(uuid "0af497b9-52eb-4522-abd6-8c805d0d29f7")
 		)
+		(embedded_fonts no)
 	)
 	(footprint "MountingHole:MountingHole_3.2mm_M3"
 		(layer "F.Cu")
@@ -14020,20 +13570,7 @@
 				)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b7b611ce-c426-4f37-892a-10b751a79770")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -14061,8 +13598,8 @@
 		)
 		(property ki_fp_filters "MountingHole*")
 		(path "/49ffd7dc-999c-4f6a-a5d0-86a0914c64b5")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr exclude_from_pos_files)
 		(fp_circle
 			(center 0 0)
@@ -14071,7 +13608,7 @@
 				(width 0.15)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "Cmts.User")
 			(uuid "055be265-8235-46d9-aefa-54a38c6c1c24")
 		)
@@ -14082,7 +13619,7 @@
 				(width 0.05)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "b6b5da62-9541-4bfa-8f44-9f4451401fbc")
 		)
@@ -14101,9 +13638,10 @@
 			(at 0 0)
 			(size 3.2 3.2)
 			(drill 3.2)
-			(layers "F&B.Cu" "*.Mask")
+			(layers "*.Cu" "*.Mask")
 			(uuid "2502f308-c232-4ba0-a116-bfbfb44ac299")
 		)
+		(embedded_fonts no)
 	)
 	(footprint "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 		(layer "F.Cu")
@@ -14133,20 +13671,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "cd9e32d3-6c66-4513-86d1-4706a67cb57c")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -14174,8 +13699,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/096fd3bd-8888-4a7c-b421-da7303dd1b8e")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 0.54 -1.37)
@@ -14368,6 +13893,7 @@
 			(pintype "passive")
 			(uuid "d9fafbd3-3f12-491b-96ed-a2aeb3494f59")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -14398,7 +13924,7 @@
 				)
 			)
 		)
-		(property "Value" "150k"
+		(property "Value" "1k"
 			(at 4.84 0.07 90)
 			(layer "F.SilkS")
 			(uuid "8d5162bb-f988-4321-978b-5f2d585f7471")
@@ -14409,20 +13935,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c09f9a35-b865-43d6-bc85-794a0fbd728a")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -14450,8 +13963,8 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/f8c99379-8062-43a2-8206-9c85e114880d")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 7.08 -1.37)
@@ -14644,6 +14157,7 @@
 			(pintype "passive")
 			(uuid "b92d376c-2e10-40ae-8934-ccb7f3f55d80")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -14684,20 +14198,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5d05e0f4-3904-4436-bb9d-7ededc873d80")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -14725,8 +14226,8 @@
 		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/b39d62b1-c1b1-4cd7-9745-0be53db59e50")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -2.85 -2.75)
@@ -15146,6 +14647,7 @@
 			(pintype "passive")
 			(uuid "6f8e80da-8fa7-4598-9030-3ebe2e656ae7")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Connector_JST.3dshapes/JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -15186,20 +14688,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c1ad5b0f-a425-49b4-99ec-7a2402e59a57")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
+		(property "Datasheet" "~"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -15227,8 +14716,8 @@
 		)
 		(property ki_fp_filters "CP_*")
 		(path "/67a04be3-37de-45d1-8c20-8ee318541e3c")
-		(sheetname "Root")
-		(sheetfile "Traeger rev 2.2.0.kicad_sch")
+		(sheetname "/")
+		(sheetfile "Traeger rev 2.3.0.kicad_pro.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -2.659698 -2.315)
@@ -16807,7 +16296,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "fe69047f-f7eb-42a7-9a56-b4285fbe6ade")
 		)
@@ -16818,7 +16307,7 @@
 				(width 0.05)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "aa15d83b-4e44-4318-8ece-885c0ac739e9")
 		)
@@ -16849,7 +16338,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "3ab67364-d60d-41d8-87f0-524eed835545")
 		)
@@ -16884,6 +16373,7 @@
 			(pintype "passive")
 			(uuid "adcd6122-eddd-418e-bf2a-659de77f0b7d")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D8.0mm_P3.50mm.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -16903,7 +16393,7 @@
 			(width 0.1)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.SilkS")
 		(uuid "0ed2877a-b434-4a11-b3fd-9dd96828a8dc")
 	)
@@ -16925,7 +16415,7 @@
 			(width 0.2)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.SilkS")
 		(uuid "20fe2511-a176-475f-aaa2-d3c5e8e06c83")
 	)
@@ -16989,21 +16479,9 @@
 			(width 0.05)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "Edge.Cuts")
 		(uuid "2fce4888-f290-4288-8352-b6feeaee44f0")
-	)
-	(gr_text "Traeger Controller\n(c) 2025, 2026 Jeff Stevenson\nREV 2.3.0 1-5-26"
-		(at 164.4 58.82 90)
-		(layer "B.SilkS")
-		(uuid "ce6912a8-c283-48cf-b4b1-369c754058c3")
-		(effects
-			(font
-				(size 1.5 1.5)
-				(thickness 0.1)
-			)
-			(justify left bottom mirror)
-		)
 	)
 	(gr_text "A2"
 		(at 159.69 106.49 0)
@@ -17295,6 +16773,18 @@
 				(bold yes)
 			)
 			(justify left bottom)
+		)
+	)
+	(gr_text "Traeger Controller\n(c) 2025, 2026 Jeff Stevenson\nREV 2.3.0 1-5-26"
+		(at 164.4 58.82 90)
+		(layer "B.SilkS")
+		(uuid "ce6912a8-c283-48cf-b4b1-369c754058c3")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left bottom mirror)
 		)
 	)
 	(segment
@@ -19559,12 +19049,140 @@
 		(uuid "eb6df51a-0cda-4d17-875a-2b9d49d3b883")
 	)
 	(segment
+		(start 194.5 103)
+		(end 194.5 108.5)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "089386cd-b4ab-4e78-9975-c2eced663062")
+	)
+	(segment
+		(start 125.02 89.18)
+		(end 123.82 89.18)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "221c63c5-b458-41d0-b852-76c2591f2928")
+	)
+	(segment
+		(start 136.4697 108.8803)
+		(end 143.3503 108.8803)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "3817b502-bacd-4081-bb46-7ee6e65dd949")
+	)
+	(segment
+		(start 134.91 110.44)
+		(end 136.4697 108.8803)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "39f093d4-4829-4ca4-9309-530ad62eab50")
+	)
+	(segment
+		(start 198.5 99)
+		(end 194.5 103)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "6876153f-954b-442c-a122-306e5ae7da70")
+	)
+	(segment
+		(start 157.9617 108.9483)
+		(end 156.41 110.5)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "7b37453c-8f90-43b7-aa9d-3c08ba5659b6")
+	)
+	(segment
+		(start 125.02 99.34)
+		(end 126.1717 99.34)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "7e95d582-8b19-41d1-8b6b-2057c1daa55c")
+	)
+	(segment
+		(start 143.3503 108.8803)
+		(end 144.91 110.44)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "96c28fc6-8d9f-4289-bef0-b198fb158bd1")
+	)
+	(segment
+		(start 126.6317 99.8)
+		(end 126.1717 99.34)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "add9abda-bc8b-4d1d-8097-d57de97b61aa")
+	)
+	(segment
+		(start 124.6129 99.5)
+		(end 124.73645 99.62355)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "d7ab1294-e177-4d46-900c-288cb46b351b")
+	)
+	(segment
+		(start 164.8583 108.9483)
+		(end 157.9617 108.9483)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "dcacbfec-7cf3-4954-a23e-a9dc1a160dac")
+	)
+	(segment
+		(start 132.09 99.8)
+		(end 126.6317 99.8)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "dfb33ffc-7baf-4f54-bf7d-7ea5112f3bd7")
+	)
+	(segment
+		(start 166.41 110.5)
+		(end 164.8583 108.9483)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 25)
+		(uuid "fafb59c1-d00c-4a43-81d9-4f83cb1df9dd")
+	)
+	(via
+		(at 198.5 99)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net 25)
+		(uuid "49fb73e2-4ae4-4eca-ae64-8e6ed0b64f31")
+	)
+	(via
+		(at 194.5 108.5)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net 25)
+		(uuid "880618f5-66b3-440f-afc8-fb984e166bdd")
+	)
+	(segment
 		(start 216.79 111.6621)
 		(end 216.79 111.87)
 		(width 0.2)
 		(layer "B.Cu")
 		(net 25)
 		(uuid "011a9ada-9b84-4995-b4e4-cb3bdabb3109")
+	)
+	(segment
+		(start 146.4617 111.9917)
+		(end 144.91 110.44)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "1b1f66be-41cd-4ab5-b439-a1ad82f4562d")
 	)
 	(segment
 		(start 183.5809 61.28)
@@ -19575,12 +19193,60 @@
 		(uuid "1e4a143a-318e-4272-809f-534ba7fd4a35")
 	)
 	(segment
+		(start 155.752 109.842)
+		(end 156.41 110.5)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "257f2b47-2146-49d9-9587-aa06267240af")
+	)
+	(segment
 		(start 183.5809 61.28)
 		(end 199.9107 77.6098)
 		(width 0.2)
 		(layer "B.Cu")
 		(net 25)
 		(uuid "2f4c7aba-7db0-4e61-bc9f-4a11eb5a001e")
+	)
+	(segment
+		(start 168.2812 108.6288)
+		(end 166.41 110.5)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "31b3d97d-579c-4dc7-bdee-9c06c7faf37f")
+	)
+	(segment
+		(start 123.8575 97.2943)
+		(end 123.8575 89.7666)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "39711956-d44c-492c-9ace-d50493ca25c8")
+	)
+	(segment
+		(start 132.09 99.8)
+		(end 132.09 100.9517)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "3d8af1c4-1b1c-46c9-8f0e-9564b4d65669")
+	)
+	(segment
+		(start 132.8574 100.9517)
+		(end 132.09 100.9517)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "3db0d962-0c4c-49f0-9f1a-6248a43ca682")
+	)
+	(segment
+		(start 125.02 89.18)
+		(end 125.02 88.6041)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "41ab1e59-59ce-4520-92d4-b1ad48d8539f")
 	)
 	(segment
 		(start 184.2317 60.6292)
@@ -19607,12 +19273,92 @@
 		(uuid "5cdb8a8d-9313-4ac4-8d14-b75d9ddb247e")
 	)
 	(segment
+		(start 123.8575 89.7666)
+		(end 125.02 88.6041)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "5d96dd13-7e7a-4d72-9791-43e9cbf668eb")
+	)
+	(segment
+		(start 183.699526 112.97828)
+		(end 190.02172 112.97828)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "63c7c9be-99ff-40d6-af6a-184e993932a8")
+	)
+	(segment
+		(start 125.02 98.1883)
+		(end 124.7515 98.1883)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "6941d851-fb4a-4a14-ae7e-ba03d933ec6f")
+	)
+	(segment
 		(start 207.1917 103.18)
 		(end 208.3079 103.18)
 		(width 0.2)
 		(layer "B.Cu")
 		(net 25)
 		(uuid "6b339de8-024c-4619-9f2f-0107eb613dac")
+	)
+	(segment
+		(start 177.609 108.6288)
+		(end 168.2812 108.6288)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "6f7c37b3-f31f-46f1-a1d6-35dc6e7b054d")
+	)
+	(segment
+		(start 151.3153 111.9917)
+		(end 146.4617 111.9917)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "7704c9e2-939f-4333-a81c-fc9ec395e278")
+	)
+	(segment
+		(start 183.699526 112.97828)
+		(end 181.95848 112.97828)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "7dc15c04-5622-42f9-9de6-bf06a04de271")
+	)
+	(segment
+		(start 124.7515 98.1883)
+		(end 123.8575 97.2943)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "7fd4c33e-3553-42aa-8e9f-dc35242c2410")
+	)
+	(segment
+		(start 153.465 109.842)
+		(end 151.3153 111.9917)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "86ad385b-e13f-40dc-ab04-ca8c1c30016c")
+	)
+	(segment
+		(start 134.91 103.0043)
+		(end 132.8574 100.9517)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "9653deb1-c1cb-4620-b2a0-a83f793fa3d3")
+	)
+	(segment
+		(start 181.95848 112.97828)
+		(end 177.609 108.6288)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "aa462573-5317-49cd-8d89-e4f51e97dc48")
 	)
 	(segment
 		(start 199.9107 95.899)
@@ -19623,6 +19369,38 @@
 		(uuid "af0d679a-0360-4512-81aa-582c63f194b9")
 	)
 	(segment
+		(start 190.02172 112.97828)
+		(end 194.5 108.5)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "c923f46e-a59a-427a-b980-452ba18628a8")
+	)
+	(segment
+		(start 153.465 109.842)
+		(end 155.752 109.842)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "cf51d511-c1ba-472d-897b-2f7f62492c5f")
+	)
+	(segment
+		(start 125.02 99.34)
+		(end 125.02 98.1883)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "d1011ba3-5b41-40e0-8628-6507b5f6be23")
+	)
+	(segment
+		(start 199.9107 95.899)
+		(end 199.9107 97.5893)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "d84443a4-8e95-4b68-bc27-9a6224a43d4e")
+	)
+	(segment
 		(start 182.93 58.74)
 		(end 184.2317 58.74)
 		(width 0.2)
@@ -19631,12 +19409,28 @@
 		(uuid "e10a01f7-e73c-4ef9-aa61-b1056759f56d")
 	)
 	(segment
+		(start 199.9107 97.5893)
+		(end 198.5 99)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "e6c75ca7-4ab0-476d-adad-eb39cb479a2f")
+	)
+	(segment
 		(start 182.93 61.28)
 		(end 183.5809 61.28)
 		(width 0.2)
 		(layer "B.Cu")
 		(net 25)
 		(uuid "e90aa4d1-1e1c-47d7-bdf0-8c4ea95d5e3f")
+	)
+	(segment
+		(start 134.91 110.44)
+		(end 134.91 103.0043)
+		(width 0.2)
+		(layer "B.Cu")
+		(net 25)
+		(uuid "f2e99132-f1a9-4422-9b39-cc9b6931fb5d")
 	)
 	(segment
 		(start 218.4839 81.59)
@@ -19783,14 +19577,6 @@
 		(uuid "0001f917-b6e2-43df-bb73-ab2b3f649448")
 	)
 	(segment
-		(start 193.178 89.7146)
-		(end 193.178 92.4768)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 28)
-		(uuid "12ebfb57-ba79-47f5-a790-a5b221900a1c")
-	)
-	(segment
 		(start 209.649 95.2663)
 		(end 212.5353 92.38)
 		(width 0.2)
@@ -19861,14 +19647,6 @@
 		(layer "F.Cu")
 		(net 28)
 		(uuid "f364b254-1f2b-4036-b96a-111fa7759d6c")
-	)
-	(via
-		(at 193.178 89.7146)
-		(size 0.6)
-		(drill 0.3)
-		(layers "F.Cu" "B.Cu")
-		(net 28)
-		(uuid "f3b9ab67-c411-4427-9b41-a57620bbb64b")
 	)
 	(segment
 		(start 214.6667 89.91)
@@ -20815,6 +20593,22 @@
 		(uuid "18a36c46-fec3-48c0-9222-c713d04d05ff")
 	)
 	(segment
+		(start 177 108.95635)
+		(end 176.5 108.95635)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 41)
+		(uuid "1928bd46-2961-4d85-a060-ce4c2bfe5688")
+	)
+	(segment
+		(start 181.04365 108.95635)
+		(end 177 108.95635)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 41)
+		(uuid "2402fc84-1b6d-4a06-882e-0d62b805719c")
+	)
+	(segment
 		(start 150.46 84.9883)
 		(end 167.7262 84.9883)
 		(width 0.2)
@@ -20839,28 +20633,20 @@
 		(uuid "37ae3f1c-7b4f-4c7d-a7bc-a7968ae294db")
 	)
 	(segment
-		(start 136.4697 108.8803)
-		(end 143.3503 108.8803)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 41)
-		(uuid "3817b502-bacd-4081-bb46-7ee6e65dd949")
-	)
-	(segment
-		(start 134.91 110.44)
-		(end 136.4697 108.8803)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 41)
-		(uuid "39f093d4-4829-4ca4-9309-530ad62eab50")
-	)
-	(segment
 		(start 217.574 75.554)
 		(end 200.4596 75.554)
 		(width 0.2)
 		(layer "F.Cu")
 		(net 41)
 		(uuid "3f1fe6ce-d534-4ac0-bc59-854a96f839a4")
+	)
+	(segment
+		(start 181.04365 108.95635)
+		(end 181.6246 109.5373)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 41)
+		(uuid "43ccb58e-63a2-49c7-a6d6-f9f3ec4fb4bf")
 	)
 	(segment
 		(start 214.9874 59.2026)
@@ -20896,7 +20682,7 @@
 	)
 	(segment
 		(start 181.0356 108.9483)
-		(end 181.6246 109.5373)
+		(end 181.04365 108.95635)
 		(width 0.2)
 		(layer "F.Cu")
 		(net 41)
@@ -20911,28 +20697,12 @@
 		(uuid "792a33e8-617a-4acb-b81c-29aef50893db")
 	)
 	(segment
-		(start 157.9617 108.9483)
-		(end 156.41 110.5)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 41)
-		(uuid "7b37453c-8f90-43b7-aa9d-3c08ba5659b6")
-	)
-	(segment
 		(start 150.46 86.14)
 		(end 150.46 84.9883)
 		(width 0.2)
 		(layer "F.Cu")
 		(net 41)
 		(uuid "7b50f5f2-12e5-4d66-b5cc-7b71152e9399")
-	)
-	(segment
-		(start 125.02 99.34)
-		(end 126.1717 99.34)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 41)
-		(uuid "7e95d582-8b19-41d1-8b6b-2057c1daa55c")
 	)
 	(segment
 		(start 200.4596 75.554)
@@ -20951,6 +20721,14 @@
 		(uuid "889a8287-64bc-4f01-9b14-ba84608a3fe1")
 	)
 	(segment
+		(start 152 102.6849)
+		(end 151.93 102.6849)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 41)
+		(uuid "911996fd-f6cb-4251-ad01-c68fcc0207e4")
+	)
+	(segment
 		(start 154.035 91.87)
 		(end 172.6573 91.87)
 		(width 0.2)
@@ -20959,20 +20737,12 @@
 		(uuid "92f60663-51d3-4dc0-96f9-cbc1d2669dc7")
 	)
 	(segment
-		(start 143.3503 108.8803)
-		(end 144.91 110.44)
+		(start 174.04365 106)
+		(end 153 106)
 		(width 0.2)
 		(layer "F.Cu")
 		(net 41)
-		(uuid "96c28fc6-8d9f-4289-bef0-b198fb158bd1")
-	)
-	(segment
-		(start 167.9617 108.9483)
-		(end 181.0356 108.9483)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 41)
-		(uuid "98a212a9-771a-4f64-9f3a-11d0ec1aee57")
+		(uuid "9b423478-8502-4d1e-9972-770c085f5a28")
 	)
 	(segment
 		(start 181.9348 77.4248)
@@ -20991,14 +20761,6 @@
 		(uuid "abe85315-46fd-41f5-b972-19b528c49b1e")
 	)
 	(segment
-		(start 126.6317 99.8)
-		(end 126.1717 99.34)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 41)
-		(uuid "add9abda-bc8b-4d1d-8097-d57de97b61aa")
-	)
-	(segment
 		(start 198.5888 77.4248)
 		(end 181.9348 77.4248)
 		(width 0.2)
@@ -21007,20 +20769,20 @@
 		(uuid "d2b9115d-61b8-4d84-a06f-36a49e9d3f06")
 	)
 	(segment
-		(start 164.8583 108.9483)
-		(end 157.9617 108.9483)
+		(start 153 106)
+		(end 152 105)
 		(width 0.2)
 		(layer "F.Cu")
 		(net 41)
-		(uuid "dcacbfec-7cf3-4954-a23e-a9dc1a160dac")
+		(uuid "d83aae8b-1e9c-4e45-9f6d-31edb4f5da75")
 	)
 	(segment
-		(start 132.09 99.8)
-		(end 126.6317 99.8)
+		(start 177 108.95635)
+		(end 174.04365 106)
 		(width 0.2)
 		(layer "F.Cu")
 		(net 41)
-		(uuid "dfb33ffc-7baf-4f54-bf7d-7ea5112f3bd7")
+		(uuid "dc1544ab-c757-45a1-81b3-91e16a319b16")
 	)
 	(segment
 		(start 174.7282 77.9863)
@@ -21031,6 +20793,14 @@
 		(uuid "e54399fe-869c-4af1-8665-ea5c2ed2f3c9")
 	)
 	(segment
+		(start 152 105)
+		(end 152 102.6849)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 41)
+		(uuid "edf0944a-4883-4fc7-ad16-568f76efd790")
+	)
+	(segment
 		(start 179.5137 75.0037)
 		(end 179.63 75.12)
 		(width 0.2)
@@ -21039,28 +20809,12 @@
 		(uuid "f225ab6e-c123-4d4c-8a4d-697cc8c19197")
 	)
 	(segment
-		(start 166.41 110.5)
-		(end 167.9617 108.9483)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 41)
-		(uuid "f89f15d6-1140-4d99-ba79-c6fd418d4a2c")
-	)
-	(segment
-		(start 166.41 110.5)
-		(end 164.8583 108.9483)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 41)
-		(uuid "fafb59c1-d00c-4a43-81d9-4f83cb1df9dd")
-	)
-	(segment
-		(start 146.4617 111.9917)
-		(end 144.91 110.44)
+		(start 135.96 83.46)
+		(end 138.64 86.14)
 		(width 0.2)
 		(layer "B.Cu")
 		(net 41)
-		(uuid "1b1f66be-41cd-4ab5-b439-a1ad82f4562d")
+		(uuid "1569723b-4471-49be-bcdf-0f47b6a210df")
 	)
 	(segment
 		(start 214.22 84.8783)
@@ -21069,22 +20823,6 @@
 		(layer "B.Cu")
 		(net 41)
 		(uuid "1ddc0997-511a-4f3d-8746-47393dc150b7")
-	)
-	(segment
-		(start 125.02 88.6041)
-		(end 132.6641 80.96)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "23c7a69d-e73d-4757-bc51-2e89ec2f23de")
-	)
-	(segment
-		(start 155.752 109.842)
-		(end 156.41 110.5)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "257f2b47-2146-49d9-9587-aa06267240af")
 	)
 	(segment
 		(start 225.1254 65.8448)
@@ -21103,36 +20841,12 @@
 		(uuid "33a7045f-3998-4c72-87fb-f4cbdd86f1f5")
 	)
 	(segment
-		(start 123.8575 97.2943)
-		(end 123.8575 89.7666)
+		(start 138.64 86.14)
+		(end 150.46 86.14)
 		(width 0.2)
 		(layer "B.Cu")
 		(net 41)
-		(uuid "39711956-d44c-492c-9ace-d50493ca25c8")
-	)
-	(segment
-		(start 132.09 99.8)
-		(end 132.09 100.9517)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "3d8af1c4-1b1c-46c9-8f0e-9564b4d65669")
-	)
-	(segment
-		(start 132.8574 100.9517)
-		(end 132.09 100.9517)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "3db0d962-0c4c-49f0-9f1a-6248a43ca682")
-	)
-	(segment
-		(start 125.02 89.18)
-		(end 125.02 88.6041)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "41ab1e59-59ce-4520-92d4-b1ad48d8539f")
+		(uuid "4d80cd81-3eca-4d3e-bcac-4ad223fb386f")
 	)
 	(segment
 		(start 136.02 65.31)
@@ -21151,22 +20865,6 @@
 		(uuid "518a9872-e933-4b96-9efc-c508e75fd036")
 	)
 	(segment
-		(start 123.8575 89.7666)
-		(end 125.02 88.6041)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "5d96dd13-7e7a-4d72-9791-43e9cbf668eb")
-	)
-	(segment
-		(start 125.02 98.1883)
-		(end 124.7515 98.1883)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "6941d851-fb4a-4a14-ae7e-ba03d933ec6f")
-	)
-	(segment
 		(start 221.8649 73.9351)
 		(end 218.91 76.89)
 		(width 0.2)
@@ -21183,28 +20881,12 @@
 		(uuid "70ac6294-a5bf-420e-a2e2-5393b5e543eb")
 	)
 	(segment
-		(start 151.93 101.155)
-		(end 151.93 108.307)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "71bea5e5-6a59-4c0d-8b31-f3ac252d82cf")
-	)
-	(segment
 		(start 221.8649 68.43)
 		(end 222.4417 68.43)
 		(width 0.2)
 		(layer "B.Cu")
 		(net 41)
 		(uuid "7282029f-0539-40a4-8103-9a13ef78b561")
-	)
-	(segment
-		(start 151.3153 111.9917)
-		(end 146.4617 111.9917)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "7704c9e2-939f-4333-a81c-fc9ec395e278")
 	)
 	(segment
 		(start 151.93 93.975)
@@ -21215,28 +20897,12 @@
 		(uuid "7c107cea-a2fb-4d1c-ae20-6d5845898e70")
 	)
 	(segment
-		(start 124.7515 98.1883)
-		(end 123.8575 97.2943)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "7fd4c33e-3553-42aa-8e9f-dc35242c2410")
-	)
-	(segment
 		(start 136.07 65.36)
 		(end 136.07 73.12)
 		(width 0.2)
 		(layer "B.Cu")
 		(net 41)
 		(uuid "81097226-f438-48e6-acc6-e166b61c1e9e")
-	)
-	(segment
-		(start 153.465 109.842)
-		(end 151.3153 111.9917)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "86ad385b-e13f-40dc-ab04-ca8c1c30016c")
 	)
 	(segment
 		(start 230.0583 60.9119)
@@ -21255,20 +20921,12 @@
 		(uuid "8d9b733a-fa90-4c3a-b92a-1a091c1267a0")
 	)
 	(segment
-		(start 132.6641 80.96)
-		(end 135.96 80.96)
+		(start 135.96 80.96)
+		(end 135.96 83.46)
 		(width 0.2)
 		(layer "B.Cu")
 		(net 41)
-		(uuid "90fb3184-5b94-445f-8da0-69cecfe43f9f")
-	)
-	(segment
-		(start 134.91 103.0043)
-		(end 132.8574 100.9517)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "9653deb1-c1cb-4620-b2a0-a83f793fa3d3")
+		(uuid "ac5421a7-277b-4e6b-b346-3e1e58aff12d")
 	)
 	(segment
 		(start 135.96 80.96)
@@ -21303,22 +20961,6 @@
 		(uuid "c5ff8385-1aa6-4144-b7ea-74361f9a8e96")
 	)
 	(segment
-		(start 153.465 109.842)
-		(end 155.752 109.842)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "cf51d511-c1ba-472d-897b-2f7f62492c5f")
-	)
-	(segment
-		(start 125.02 99.34)
-		(end 125.02 98.1883)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "d1011ba3-5b41-40e0-8628-6507b5f6be23")
-	)
-	(segment
 		(start 230.0583 60.48)
 		(end 230.0583 60.9119)
 		(width 0.2)
@@ -21351,28 +20993,12 @@
 		(uuid "ef7cdd21-31e2-41a2-927a-c700a8e6a724")
 	)
 	(segment
-		(start 134.91 110.44)
-		(end 134.91 103.0043)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "f2e99132-f1a9-4422-9b39-cc9b6931fb5d")
-	)
-	(segment
 		(start 150.46 92.505)
 		(end 150.46 86.14)
 		(width 0.2)
 		(layer "B.Cu")
 		(net 41)
 		(uuid "f68d470a-c401-4d0d-bc23-77b8d75d3816")
-	)
-	(segment
-		(start 151.93 108.307)
-		(end 153.465 109.842)
-		(width 0.2)
-		(layer "B.Cu")
-		(net 41)
-		(uuid "fd8f2c2f-d28b-4962-a26c-9c0a61e244e7")
 	)
 	(segment
 		(start 117.88 56.49)
@@ -21844,4 +21470,5 @@
 		(uuid "b4fdf8a2-b7f8-46c9-aedc-a84dabc09e0f")
 		(members "0ed2877a-b434-4a11-b3fd-9dd96828a8dc")
 	)
+	(embedded_fonts no)
 )
