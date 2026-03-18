@@ -190,9 +190,10 @@ display:
           // Background
           it.filled_rectangle(gx, gy, gw, gh, Color(20, 20, 20));
 
-          // Horizontal gridlines at 200, 300, 400 F
-          for (int grid_f : {200, 300, 400}) {
-            if (grid_f >= y_min && grid_f <= y_max) {
+          // Horizontal gridlines - 25F intervals in smoke mode, 100F in normal
+          auto gridlines = id(smoke_mode).state ? std::vector<int>{175, 200, 225} : std::vector<int>{200, 300, 400};
+          for (int grid_f : gridlines) {
+            if (grid_f > y_min && grid_f < y_max) {
               int grid_y = gy + gh - (int)((grid_f - y_min) / y_range * gh);
               it.horizontal_line(gx, grid_y, gw, Color(50, 50, 50));
               it.printf(gx + 2, grid_y - 9, id(font_tiny), Color(100, 100, 100), "%d", grid_f);
@@ -1527,10 +1528,12 @@ interval:
             id(graph_probe1_temp).erase(id(graph_probe1_temp).begin());
             id(graph_probe2_temp).erase(id(graph_probe2_temp).begin());
           }
-          // Update y_max if any temp exceeds current scale
-          float new_max = 450.0f;
-          for (float v : id(graph_set_temp)) if (v > new_max) new_max = v + 50.0f;
-          for (float v : id(graph_rtd_temp)) if (v > new_max) new_max = v + 50.0f;
+          // Update y_max based on mode, expand if any temp goes out of range
+          float new_max = id(smoke_mode).state ? 250.0f : 450.0f;
+          for (float v : id(graph_set_temp)) if (v > new_max) new_max = v + 25.0f;
+          for (float v : id(graph_rtd_temp)) if (v > new_max) new_max = v + 25.0f;
+          for (float v : id(graph_probe1_temp)) if (!isnan(v) && v > new_max) new_max = v + 25.0f;
+          for (float v : id(graph_probe2_temp)) if (!isnan(v) && v > new_max) new_max = v + 25.0f;
           id(graph_y_max) = new_max;
 
 script:
