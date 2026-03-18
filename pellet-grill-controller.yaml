@@ -13,7 +13,10 @@ esphome:
   on_boot:
     priority: -100
     then:
-      - lambda: id(status_msg).publish_state("Ready"); 
+      - lambda: id(status_msg).publish_state("Ready");
+      - delay: 3s
+      - lambda: id(mydisplay).update();
+      - switch.turn_on: backlight
 
       # Check RTD temperature and turn on fans if needed
       - if:
@@ -104,7 +107,7 @@ spi:
 display:
   - platform: ili9xxx
     id: mydisplay
-    setup_priority: -200
+    setup_priority: -500
     spi_id: spi_bus
     data_rate: 40MHz
     model: ILI9488_A #TFT 3.5  
@@ -112,7 +115,7 @@ display:
     cs_pin: GPIO7 
     reset_pin: GPIO6 #pin 5 display
     color_palette: 8BIT
-    #LED - jumper to VCC so it is always on
+    #LED - GPIO16 via jumper, controlled by backlight switch
     rotation: 90
     update_interval: 0.1s
     invert_colors: true
@@ -886,6 +889,12 @@ text_sensor:
     id: status_msg_saved_page_1
 
 switch:
+
+  - platform: gpio
+    pin: GPIO16
+    id: backlight
+    name: "Display Backlight"
+    restore_mode: ALWAYS_OFF
 
   - platform: template
     optimistic: true
