@@ -177,9 +177,19 @@ display:
          it.filled_rectangle(219, 42, 3, 58, Color(120, 120, 120)); // Left highlight
          it.filled_rectangle(264, 42, 3, 58, Color(40, 40, 40));    // Right shadow
        }
-       if (id(smoke_mode).state) {
-         it.printf(77, 118, id(font20), white, TextAlign::TOP_CENTER, "P Select");
-         it.printf(77, 140, id(font45), white, TextAlign::TOP_CENTER, "%s", id(p_select).current_option().c_str());
+       if (id(knob_mode) == 1) {
+         it.printf(77, 118, id(font20), Color(0, 220, 0), TextAlign::TOP_CENTER, "Probe Set");
+         it.printf(77, 140, id(font45), Color(0, 220, 0), TextAlign::TOP_CENTER, "%.0f°", to_disp(id(meat_probe_setpoint).state));
+       } else if (id(smoke_mode).state) {
+         it.printf(77, 118, id(font20), white, TextAlign::TOP_CENTER, "%s", id(p_select).current_option().c_str());
+         // Slow flash: visible for ~700ms, hidden for ~300ms
+         bool blink_on = (millis() % 1000) < 700;
+         bool auger_on = id(auger_1_sw).state;
+         auto on_color = (auger_on && blink_on) ? Color(255, 165, 0) : grey;
+         auto off_color = (!auger_on && blink_on) ? white : grey;
+         it.printf(37, 142, id(font30), on_color, TextAlign::TOP_CENTER, "%.0fs", id(smoke_on_time).state);
+         it.printf(77, 142, id(font30), grey, TextAlign::TOP_CENTER, "/");
+         it.printf(117, 142, id(font30), off_color, TextAlign::TOP_CENTER, "%.0fs", id(smoke_off_time).state);
        } else {
          it.printf(77, 118, id(font20), white, TextAlign::TOP_CENTER, "Set Temp");
          it.printf(77, 140, id(font45), white, TextAlign::TOP_CENTER, "%.0f°", to_disp(id(smoker_set_temp).state));
@@ -260,6 +270,20 @@ display:
                   it.line(x1, p2y1, x2, p2y2, Color(255, 200, 0));
                 }
               }
+            }
+          }
+
+          // Meat probe setpoint line (dashed green, only if probe connected)
+          bool any_probe = id(a0_voltage).state > 0.2f || id(a1_voltage).state > 0.2f;
+          if (any_probe) {
+            float probe_set_disp = to_disp(id(meat_probe_setpoint).state);
+            if (probe_set_disp > y_min && probe_set_disp < y_max) {
+              int psy = gy + gh - (int)((probe_set_disp - y_min) / y_range * gh);
+              // Dashed line
+              for (int dx = gx; dx < gx + gw; dx += 6) {
+                it.horizontal_line(dx, psy, 3, Color(0, 220, 0));
+              }
+              it.printf(gx + gw - 2, psy - 9, id(font_tiny), Color(0, 220, 0), TextAlign::TOP_RIGHT, "%.0f", probe_set_disp);
             }
           }
 
@@ -379,20 +403,30 @@ display:
           it.filled_rectangle(1, 294, 128, 149, black);
           bool p1_conn = id(a0_voltage).state > 0.2f;
           bool p2_conn = id(a1_voltage).state > 0.2f;
+          float probe_target = id(meat_probe_setpoint).state;
+          bool probe_blink = (millis() % 800) < 500;
           if (p1_conn && p2_conn) {
             // Two probes - stacked compact layout
-            it.printf(65, 304, id(font20), Color(0, 220, 0), TextAlign::TOP_CENTER, "P1");
-            it.printf(65, 326, id(font40), Color(0, 220, 0), TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a0_temperature).state));
-            it.printf(65, 378, id(font20), Color(255, 200, 0), TextAlign::TOP_CENTER, "P2");
-            it.printf(65, 400, id(font40), Color(255, 200, 0), TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a1_temperature).state));
+            bool p1_done = id(a0_temperature).state >= probe_target;
+            bool p2_done = id(a1_temperature).state >= probe_target;
+            auto p1_col = (p1_done && probe_blink) ? black : Color(0, 220, 0);
+            auto p2_col = (p2_done && probe_blink) ? black : Color(255, 200, 0);
+            it.printf(65, 304, id(font20), p1_col, TextAlign::TOP_CENTER, "P1");
+            it.printf(65, 326, id(font40), p1_col, TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a0_temperature).state));
+            it.printf(65, 378, id(font20), p2_col, TextAlign::TOP_CENTER, "P2");
+            it.printf(65, 400, id(font40), p2_col, TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a1_temperature).state));
           } else if (p1_conn) {
             // Single probe - large centered
-            it.printf(65, 330, id(font20), Color(0, 220, 0), TextAlign::TOP_CENTER, "P1");
-            it.printf(65, 354, id(font45), Color(0, 220, 0), TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a0_temperature).state));
+            bool p1_done = id(a0_temperature).state >= probe_target;
+            auto p1_col = (p1_done && probe_blink) ? black : Color(0, 220, 0);
+            it.printf(65, 330, id(font20), p1_col, TextAlign::TOP_CENTER, "P1");
+            it.printf(65, 354, id(font45), p1_col, TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a0_temperature).state));
           } else if (p2_conn) {
             // Single probe - large centered
-            it.printf(65, 330, id(font20), Color(255, 200, 0), TextAlign::TOP_CENTER, "P2");
-            it.printf(65, 354, id(font45), Color(255, 200, 0), TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a1_temperature).state));
+            bool p2_done = id(a1_temperature).state >= probe_target;
+            auto p2_col = (p2_done && probe_blink) ? black : Color(255, 200, 0);
+            it.printf(65, 330, id(font20), p2_col, TextAlign::TOP_CENTER, "P2");
+            it.printf(65, 354, id(font45), p2_col, TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a1_temperature).state));
           }
 
           // Pellet hopper graphic - shifted left
@@ -495,7 +529,12 @@ globals:
   - id: page_1_selected_option
     type: std::string
     restore_value: no
-    initial_value: '"temp_setting"'    
+    initial_value: '"temp_setting"'
+
+  - id: knob_mode
+    type: int
+    restore_value: no
+    initial_value: '0'  # 0 = grill temp, 1 = probe setpoint
 
   - id: status_msg_page_1
     type: std::string
@@ -544,23 +583,27 @@ select:
       - "P3"
       - "P4"
       - "P5"
+      - "P6"
+      - "P7"
     initial_option: "P0"
     restore_value: true
     optimistic: true
     set_action:
       - logger.log:
           format: "Chosen option: %s"
-          args: ["x.c_str()"]      
-    on_value: #set smoke times
+          args: ["x.c_str()"]
+    on_value: #set smoke times - Pit Boss style
       - lambda: |-
           id(p_select_index_global) = i;
           switch(i) {
-            case 0: id(smoke_off_time).publish_state(40); id(smoke_on_time).publish_state(10);  break;
-            case 1: id(smoke_off_time).publish_state(50); id(smoke_on_time).publish_state(10);  break;
-            case 2: id(smoke_off_time).publish_state(60); id(smoke_on_time).publish_state(10);  break;
-            case 3: id(smoke_off_time).publish_state(70); id(smoke_on_time).publish_state(10);  break;
-            case 4: id(smoke_off_time).publish_state(80); id(smoke_on_time).publish_state(10);  break;
-            case 5: id(smoke_off_time).publish_state(90); id(smoke_on_time).publish_state(10);  break;
+            case 0: id(smoke_off_time).publish_state(55);  id(smoke_on_time).publish_state(18); break;
+            case 1: id(smoke_off_time).publish_state(65);  id(smoke_on_time).publish_state(18); break;
+            case 2: id(smoke_off_time).publish_state(75);  id(smoke_on_time).publish_state(18); break;
+            case 3: id(smoke_off_time).publish_state(85);  id(smoke_on_time).publish_state(18); break;
+            case 4: id(smoke_off_time).publish_state(95);  id(smoke_on_time).publish_state(18); break;
+            case 5: id(smoke_off_time).publish_state(115); id(smoke_on_time).publish_state(18); break;
+            case 6: id(smoke_off_time).publish_state(130); id(smoke_on_time).publish_state(18); break;
+            case 7: id(smoke_off_time).publish_state(150); id(smoke_on_time).publish_state(18); break;
           }
 i2c: 
   - id:  i2c_bus
@@ -828,62 +871,52 @@ sensor:
     id: rotary
     on_clockwise:
         - lambda: |-
-            if (!id(smoke_mode).state) {
+            if (id(knob_mode) == 1) {
+              // Adjust meat probe setpoint
+              float new_temp = id(meat_probe_setpoint).state + 5;
+              if (new_temp <= id(meat_probe_setpoint).traits.get_max_value()) {
+                id(meat_probe_setpoint).publish_state(new_temp);
+              }
+            } else if (!id(smoke_mode).state) {
               float current_temp = id(smoker_set_temp).state;
-              float increment;
-              if (current_temp <= 225) {
-                increment = id(rotary_switch).state ? 5 : 5;
-              } else {
-                increment = id(rotary_switch).state ? 5 : 25;
-              }
+              float increment = (current_temp <= 225) ? 5 : 25;
               float new_temp = current_temp + increment;
-              // Round to nearest multiple of 5 if <= 225, otherwise 25
-              if (current_temp <= 225) {
-                new_temp = round(new_temp / 5) * 5;
-              } else {
-                new_temp = round(new_temp / 25) * 25;
-              }
+              new_temp = (current_temp <= 225) ? round(new_temp / 5) * 5 : round(new_temp / 25) * 25;
               if (new_temp <= id(smoker_set_temp).traits.get_max_value()) {
                 id(smoker_set_temp).publish_state(new_temp);
               }
-            } else if (id(smoke_mode).state)
-              {
-                  // Adjust p_select
-                  auto current_index = id(p_select).index_of(id(p_select).state);
-                  if (current_index.has_value()) {
-                    int next_index = (current_index.value() + 1) % 6; // 6 is the number of options
-                    id(p_select).make_call().set_index(next_index).perform();
-                  }
+            } else {
+              // Adjust p_select
+              auto current_index = id(p_select).index_of(id(p_select).state);
+              if (current_index.has_value()) {
+                int next_index = (current_index.value() + 1) % 8;
+                id(p_select).make_call().set_index(next_index).perform();
+              }
             }
 
     on_anticlockwise:
         - lambda: |-
-            if (!id(smoke_mode).state) {
+            if (id(knob_mode) == 1) {
+              // Adjust meat probe setpoint
+              float new_temp = id(meat_probe_setpoint).state - 5;
+              if (new_temp >= id(meat_probe_setpoint).traits.get_min_value()) {
+                id(meat_probe_setpoint).publish_state(new_temp);
+              }
+            } else if (!id(smoke_mode).state) {
               float current_temp = id(smoker_set_temp).state;
-              float increment;
-              if (current_temp <= 225) {
-                increment = id(rotary_switch).state ? -5 : -5;
-              } else {
-                increment = id(rotary_switch).state ? -5 : -25;
-              }
+              float increment = (current_temp <= 225) ? -5 : -25;
               float new_temp = current_temp + increment;
-              // Round to nearest multiple of 5 if <= 225, otherwise 25
-              if (current_temp <= 225) {
-                new_temp = round(new_temp / 5) * 5;
-              } else {
-                new_temp = round(new_temp / 25) * 25;
-              }
+              new_temp = (current_temp <= 225) ? round(new_temp / 5) * 5 : round(new_temp / 25) * 25;
               if (new_temp >= 140 && new_temp <= id(smoker_set_temp).traits.get_max_value()) {
                 id(smoker_set_temp).publish_state(new_temp);
               }
-            } else if (id(smoke_mode).state)
-              {
-                  // Adjust p_select
-                  auto current_index = id(p_select).index_of(id(p_select).state);
-                  if (current_index.has_value()) {
-                    int next_index = (current_index.value() - 1) % 6; // 6 is the number of options
-                    id(p_select).make_call().set_index(next_index).perform();
-                   }
+            } else {
+              // Adjust p_select
+              auto current_index = id(p_select).index_of(id(p_select).state);
+              if (current_index.has_value()) {
+                int next_index = (current_index.value() - 1) % 8;
+                id(p_select).make_call().set_index(next_index).perform();
+              }
             }
 
 button:
@@ -1067,33 +1100,28 @@ binary_sensor:
       - delayed_on: 10ms
     on_press:
       - lambda: |-
-          if (!id(smoke_mode).state) {
+          if (id(knob_mode) == 1) {
+            float new_temp = id(meat_probe_setpoint).state - 5;
+            if (new_temp >= id(meat_probe_setpoint).traits.get_min_value()) {
+              id(meat_probe_setpoint).publish_state(new_temp);
+              id(mydisplay).update();
+            }
+          } else if (!id(smoke_mode).state) {
             float current_temp = id(smoker_set_temp).state;
-            float increment;
-            // Set increment based on current temperature
-            if (current_temp <= 225) {
-              increment = -5;
-            } else {
-              increment = -25;
-            }
+            float increment = (current_temp <= 225) ? -5 : -25;
             float new_temp = current_temp + increment;
-            // Round to nearest multiple of 5 if <= 225, otherwise 25
-            if (current_temp <= 225) {
-              new_temp = round(new_temp / 5) * 5;
-            } else {
-              new_temp = round(new_temp / 25) * 25;
-            }
+            new_temp = (current_temp <= 225) ? round(new_temp / 5) * 5 : round(new_temp / 25) * 25;
             if (new_temp >= 140 && new_temp <= id(smoker_set_temp).traits.get_max_value()) {
               id(smoker_set_temp).state = new_temp;
               id(mydisplay).update();
               id(smoker_set_temp).publish_state(new_temp);
             }
-          } else if (id(smoke_mode).state){
+          } else {
             // Adjust p_select
             auto current_index = id(p_select).index_of(id(p_select).state);
             if (current_index.has_value()) {
-              int next_index = (current_index.value() - 1) % 6; // 6 is the number of options
-              if (next_index < 0) next_index += 6; // Handle negative modulo
+              int next_index = (current_index.value() - 1) % 8;
+              if (next_index < 0) next_index += 8;
               id(p_select).make_call().set_index(next_index).perform();
               id(mydisplay).update();
             }
@@ -1111,32 +1139,27 @@ binary_sensor:
       - delayed_on: 10ms
     on_press:
       - lambda: |-
-          if (!id(smoke_mode).state) {
+          if (id(knob_mode) == 1) {
+            float new_temp = id(meat_probe_setpoint).state + 5;
+            if (new_temp <= id(meat_probe_setpoint).traits.get_max_value()) {
+              id(meat_probe_setpoint).publish_state(new_temp);
+              id(mydisplay).update();
+            }
+          } else if (!id(smoke_mode).state) {
             float current_temp = id(smoker_set_temp).state;
-            float increment;
-            // Set increment based on current temperature
-            if (current_temp <= 225) {
-              increment = 5;
-            } else {
-              increment = 25;
-            }
+            float increment = (current_temp <= 225) ? 5 : 25;
             float new_temp = current_temp + increment;
-            // Round to nearest multiple of 5 if <= 225, otherwise 25
-            if (current_temp <= 225) {
-              new_temp = round(new_temp / 5) * 5;
-            } else {
-              new_temp = round(new_temp / 25) * 25;
-            }
+            new_temp = (current_temp <= 225) ? round(new_temp / 5) * 5 : round(new_temp / 25) * 25;
             if (new_temp >= 140 && new_temp <= id(smoker_set_temp).traits.get_max_value()) {
               id(smoker_set_temp).state = new_temp;
               id(mydisplay).update();
               id(smoker_set_temp).publish_state(new_temp);
             }
-          } else if (id(smoke_mode).state){
+          } else {
             // Adjust p_select
             auto current_index = id(p_select).index_of(id(p_select).state);
             if (current_index.has_value()) {
-              int next_index = (current_index.value() + 1) % 6; // 6 is the number of options
+              int next_index = (current_index.value() + 1) % 8;
               id(p_select).make_call().set_index(next_index).perform();
               id(mydisplay).update();
             }
@@ -1201,18 +1224,19 @@ binary_sensor:
         then:
           - logger.log: "Single Click - Toggling adjustment selection"
           - lambda: |-
-               // Update status message & flag to indicate which value is being adjusted
-                id(status_msg).publish_state("     Toggling Adjustment section");
-                
-                if (!id(smoke_mode).state) {
-                  id(status_msg).publish_state("     Adjusting P Level");
-                  id(page_1_selected_option) = "p_setting";
-                } 
-                
-                else {
-                  id(status_msg).publish_state("     Adjusting Temp");
-                  id(page_1_selected_option) = "temp_setting";
-                }        
+               bool probe_connected = id(a0_voltage).state > 0.2f || id(a1_voltage).state > 0.2f;
+               if (id(knob_mode) == 0 && probe_connected) {
+                 id(knob_mode) = 1;
+                 id(status_msg).publish_state("Adjusting Probe Setpoint");
+               } else {
+                 id(knob_mode) = 0;
+                 if (id(smoke_mode).state) {
+                   id(status_msg).publish_state("Adjusting P Level");
+                 } else {
+                   id(status_msg).publish_state("Adjusting Temp");
+                 }
+               }
+               id(mydisplay).update();        
 
       - timing:
           - ON for at least 1s
@@ -1454,6 +1478,19 @@ number:
     unit_of_measurement: "°F"
     mode: box
     icon: mdi:tune-vertical    
+
+  - platform: template
+    name: "Meat Probe Setpoint"
+    id: meat_probe_setpoint
+    min_value: 100
+    max_value: 212
+    step: 5
+    initial_value: 165
+    optimistic: true
+    restore_value: true
+    unit_of_measurement: "°F"
+    mode: slider
+    icon: mdi:thermometer-alert
 
   - platform: template
     name: "Smoke Auger On Time (10s)"
