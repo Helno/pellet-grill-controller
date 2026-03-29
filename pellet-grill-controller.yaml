@@ -25,7 +25,8 @@ esphome:
           then:
             - switch.turn_on: fans_on_off_sw
             - lambda: id(status_msg).publish_state("Hot startup - Fans ON");
-          else:  
+            - script.execute: sc_shutdown
+          else:
             - switch.turn_off: fans_on_off_sw
             - lambda: id(status_msg).publish_state("Ready!");
       #- script.execute: sc_monitor_temp_for_fans
@@ -67,6 +68,7 @@ esp32:
     version: recommended
     sdkconfig_options:
       CONFIG_ESP32_S3_BOX_BOARD: "y"
+      CONFIG_ESP_WIFI_ENABLE_WPA3_SAE: "y"
 
 api:
   reboot_timeout: 24h
@@ -92,7 +94,11 @@ wifi:
   use_address: 10.59.233.56
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-  fast_connect: true
+  power_save_mode: none
+  ap:
+    ssid: "Pellet-Grill-Fallback"
+    password: !secret wifi_password
+captive_portal:
 
 web_server:    #you can remove this if you dont want to access the web server from your network
 
@@ -117,7 +123,7 @@ display:
     color_palette: 8BIT
     #LED - GPIO16 via jumper, controlled by backlight switch
     rotation: 90
-    update_interval: 0.1s
+    update_interval: 0.5s
     invert_colors: true
     show_test_card: false
     lambda: |-
@@ -128,9 +134,14 @@ display:
        auto white = Color(255, 255, 255);    
        auto grey = Color(120, 120, 120);
 
+       // Temperature conversion helper: F->display unit
+       auto to_disp = [](float f) -> float { return id(use_celsius) ? (f - 32.0f) * 5.0f / 9.0f : f; };
+       auto unit_str = id(use_celsius) ? "C" : "F";
+
        //Status msg
         it.filled_rectangle(0, 452, 320, 28, Color(80, 80, 80)); // Grey background with padding
         it.print(1, 454, id(font20), id(status_msg).state.c_str());
+        it.printf(306, 454, id(font20), white, TextAlign::TOP_RIGHT, "°%s", unit_str);
 
         it.printf(77, 1, id(font30), white, TextAlign::TOP_CENTER, "Heat");
         it.printf(243, 1, id(font30), white, TextAlign::TOP_CENTER, "Smoke");
@@ -171,11 +182,11 @@ display:
          it.printf(77, 140, id(font45), white, TextAlign::TOP_CENTER, "%s", id(p_select).current_option().c_str());
        } else {
          it.printf(77, 118, id(font20), white, TextAlign::TOP_CENTER, "Set Temp");
-         it.printf(77, 140, id(font45), white, TextAlign::TOP_CENTER, "%.0f°", id(smoker_set_temp).state);
+         it.printf(77, 140, id(font45), white, TextAlign::TOP_CENTER, "%.0f°", to_disp(id(smoker_set_temp).state));
        }
 
        it.printf(243, 118, id(font20), red, TextAlign::TOP_CENTER, "RTD Temp");
-       it.printf(289, 140, id(font45), red, TextAlign::TOP_RIGHT, "%.0f°", id(rtd_temperature_f).state);
+       it.printf(289, 140, id(font45), red, TextAlign::TOP_RIGHT, "%.0f°", to_disp(id(rtd_temperature_f).state));
 
         // Temperature graph (y=200 to y=283, full width)
         {
@@ -183,15 +194,17 @@ display:
           const int gy = 200;     // top of graph
           const int gw = 320;     // width
           const int gh = 83;      // height
-          const float y_min = 150.0f;
+          const float y_min = id(use_celsius) ? 65.0f : 150.0f;
           float y_max = id(graph_y_max);
           float y_range = y_max - y_min;
 
           // Background
           it.filled_rectangle(gx, gy, gw, gh, Color(20, 20, 20));
 
-          // Horizontal gridlines - 25F intervals in smoke mode, 100F in normal
-          auto gridlines = id(smoke_mode).state ? std::vector<int>{175, 200, 225} : std::vector<int>{200, 300, 400};
+          // Horizontal gridlines
+          auto gridlines = id(smoke_mode).state
+            ? (id(use_celsius) ? std::vector<int>{80, 95, 110} : std::vector<int>{175, 200, 225})
+            : (id(use_celsius) ? std::vector<int>{100, 150, 200} : std::vector<int>{200, 300, 400});
           for (int grid_f : gridlines) {
             if (grid_f > y_min && grid_f < y_max) {
               int grid_y = gy + gh - (int)((grid_f - y_min) / y_range * gh);
@@ -306,7 +319,8 @@ display:
             it.rectangle(cx-21, y_offset + 73, 42, 68, white);
           }
           // Burn pot temperature centered inside hotrod box
-          it.printf(cx-16, y_offset + 101, id(font20), Color(255, 100, 0), "%.0f°", id(firepot_temperature).state * 1.8 + 32.0);
+          it.printf(cx-16, y_offset + 101, id(font20), Color(255, 100, 0), "%.0f°",
+            id(use_celsius) ? id(firepot_temperature).state : id(firepot_temperature).state * 1.8f + 32.0f);
         }
 
         // AUGER - horizontal side view screw feeding from hopper base to hotrod
@@ -368,17 +382,17 @@ display:
           if (p1_conn && p2_conn) {
             // Two probes - stacked compact layout
             it.printf(65, 304, id(font20), Color(0, 220, 0), TextAlign::TOP_CENTER, "P1");
-            it.printf(65, 326, id(font40), Color(0, 220, 0), TextAlign::TOP_CENTER, "%.0f°", id(a0_temperature).state);
+            it.printf(65, 326, id(font40), Color(0, 220, 0), TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a0_temperature).state));
             it.printf(65, 378, id(font20), Color(255, 200, 0), TextAlign::TOP_CENTER, "P2");
-            it.printf(65, 400, id(font40), Color(255, 200, 0), TextAlign::TOP_CENTER, "%.0f°", id(a1_temperature).state);
+            it.printf(65, 400, id(font40), Color(255, 200, 0), TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a1_temperature).state));
           } else if (p1_conn) {
             // Single probe - large centered
             it.printf(65, 330, id(font20), Color(0, 220, 0), TextAlign::TOP_CENTER, "P1");
-            it.printf(65, 354, id(font45), Color(0, 220, 0), TextAlign::TOP_CENTER, "%.0f°", id(a0_temperature).state);
+            it.printf(65, 354, id(font45), Color(0, 220, 0), TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a0_temperature).state));
           } else if (p2_conn) {
             // Single probe - large centered
             it.printf(65, 330, id(font20), Color(255, 200, 0), TextAlign::TOP_CENTER, "P2");
-            it.printf(65, 354, id(font45), Color(255, 200, 0), TextAlign::TOP_CENTER, "%.0f°", id(a1_temperature).state);
+            it.printf(65, 354, id(font45), Color(255, 200, 0), TextAlign::TOP_CENTER, "%.0f°", to_disp(id(a1_temperature).state));
           }
 
           // Pellet hopper graphic - shifted left
@@ -513,6 +527,11 @@ globals:
   - id: graph_probe2_temp
     type: std::vector<float>
     restore_value: no
+
+  - id: use_celsius
+    type: bool
+    restore_value: yes
+    initial_value: 'false'
 
 select:         
   - platform: template
@@ -836,7 +855,6 @@ sensor:
                     id(p_select).make_call().set_index(next_index).perform();
                   }
             }
-            id(mydisplay).update();
 
     on_anticlockwise:
         - lambda: |-
@@ -867,7 +885,6 @@ sensor:
                     id(p_select).make_call().set_index(next_index).perform();
                    }
             }
-            id(mydisplay).update();
 
 button:
   - platform: restart #allows remote reset of tywe1s chip from home assistant or internally
@@ -901,15 +918,31 @@ switch:
     optimistic: true
     name: "System ON/OFF"
     id: go
+    restore_mode: ALWAYS_OFF
     on_turn_on:
       - logger.log: "System turned ON"
       - globals.set:
           id: lighting_flag_global
-          value: 'true'         
-      - script.execute: sc_pid_control 
+          value: 'true'
+      - script.execute: sc_pid_control
       - logger.log: "turning ON fan"
       - switch.turn_on: fans_on_off_sw
-      - script.execute: sc_light_pot
+      - if:
+          condition:
+            lambda: |-
+              float fp = id(firepot_temperature).state;
+              float rtd = id(rtd_temperature_f).state;
+              // Hot if firepot > 175F (79.4C), OR if RTD > 175F (sensor may not have reported yet)
+              return (fp > 79.4) || (rtd > 175.0);
+          then:
+            - logger.log: "Hot start detected - skipping ignition"
+            - lambda: id(status_msg).publish_state("Hot Start - Resuming");
+            - globals.set:
+                id: lighting_flag_global
+                value: 'false'
+            - script.execute: sc_pot_heating
+          else:
+            - script.execute: sc_light_pot
      
     on_turn_off:
       - logger.log: "System turned OFF"
@@ -945,7 +978,24 @@ switch:
             - lambda: id(status_msg).publish_state("Heating Mode");
             - script.stop: sc_pot_smoking
             - script.execute: sc_pot_heating
-#      
+#
+  - platform: template
+    name: "Temperature Units °C"
+    id: temp_units_celsius
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    icon: mdi:temperature-celsius
+    on_turn_on:
+      - globals.set:
+          id: use_celsius
+          value: 'true'
+      - lambda: id(mydisplay).update();
+    on_turn_off:
+      - globals.set:
+          id: use_celsius
+          value: 'false'
+      - lambda: id(mydisplay).update();
+
   - platform: gpio
     pin: GPIO11
     name: "-Fans On/Off"
@@ -1034,6 +1084,8 @@ binary_sensor:
               new_temp = round(new_temp / 25) * 25;
             }
             if (new_temp >= 140 && new_temp <= id(smoker_set_temp).traits.get_max_value()) {
+              id(smoker_set_temp).state = new_temp;
+              id(mydisplay).update();
               id(smoker_set_temp).publish_state(new_temp);
             }
           } else if (id(smoke_mode).state){
@@ -1043,9 +1095,9 @@ binary_sensor:
               int next_index = (current_index.value() - 1) % 6; // 6 is the number of options
               if (next_index < 0) next_index += 6; // Handle negative modulo
               id(p_select).make_call().set_index(next_index).perform();
+              id(mydisplay).update();
             }
           }
-          id(mydisplay).update();
 
   - platform: gpio
     pin:
@@ -1076,6 +1128,8 @@ binary_sensor:
               new_temp = round(new_temp / 25) * 25;
             }
             if (new_temp >= 140 && new_temp <= id(smoker_set_temp).traits.get_max_value()) {
+              id(smoker_set_temp).state = new_temp;
+              id(mydisplay).update();
               id(smoker_set_temp).publish_state(new_temp);
             }
           } else if (id(smoke_mode).state){
@@ -1084,9 +1138,9 @@ binary_sensor:
             if (current_index.has_value()) {
               int next_index = (current_index.value() + 1) % 6; // 6 is the number of options
               id(p_select).make_call().set_index(next_index).perform();
+              id(mydisplay).update();
             }
           }
-          id(mydisplay).update();
 
   - platform: touchscreen
     id: touch_key_POWER
@@ -1107,6 +1161,16 @@ binary_sensor:
     on_press:
       - logger.log: "SMOKE was touched"
       - switch.toggle: smoke_mode
+      - lambda: id(mydisplay).update();
+
+  - platform: touchscreen
+    id: touch_key_UNITS
+    x_min: 260
+    x_max: 320
+    y_min: 452
+    y_max: 480
+    on_press:
+      - switch.toggle: temp_units_celsius
       - lambda: id(mydisplay).update();
 
   - platform: touchscreen
@@ -1432,9 +1496,9 @@ number:
     min_value: 140
     max_value: 550
     step: 5
-    initial_value: 225
+    initial_value: 325
     optimistic: true
-    restore_value: true
+    restore_value: false
     update_interval: 60s
     unit_of_measurement: "°F"
     mode: slider
@@ -1514,10 +1578,11 @@ interval:
     then:
       - lambda: |-
           const int MAX_POINTS = 160; // 80 minutes at 30s intervals, 2px per point
-          float set_t = id(smoker_set_temp).state;
-          float rtd_t = id(rtd_temperature_f).state;
-          float p1_t = id(a0_voltage).state > 0.2f ? id(a0_temperature).state : NAN;
-          float p2_t = id(a1_voltage).state > 0.2f ? id(a1_temperature).state : NAN;
+          auto to_disp = [](float f) -> float { return id(use_celsius) ? (f - 32.0f) * 5.0f / 9.0f : f; };
+          float set_t = to_disp(id(smoker_set_temp).state);
+          float rtd_t = to_disp(id(rtd_temperature_f).state);
+          float p1_t = id(a0_voltage).state > 0.2f ? to_disp(id(a0_temperature).state) : NAN;
+          float p2_t = id(a1_voltage).state > 0.2f ? to_disp(id(a1_temperature).state) : NAN;
           id(graph_set_temp).push_back(set_t);
           id(graph_rtd_temp).push_back(rtd_t);
           id(graph_probe1_temp).push_back(p1_t);
@@ -1529,7 +1594,9 @@ interval:
             id(graph_probe2_temp).erase(id(graph_probe2_temp).begin());
           }
           // Update y_max based on mode, expand if any temp goes out of range
-          float new_max = id(smoke_mode).state ? 250.0f : 450.0f;
+          float new_max = id(smoke_mode).state
+            ? (id(use_celsius) ? 120.0f : 250.0f)
+            : (id(use_celsius) ? 230.0f : 450.0f);
           for (float v : id(graph_set_temp)) if (v > new_max) new_max = v + 25.0f;
           for (float v : id(graph_rtd_temp)) if (v > new_max) new_max = v + 25.0f;
           for (float v : id(graph_probe1_temp)) if (!isnan(v) && v > new_max) new_max = v + 25.0f;
@@ -1645,7 +1712,7 @@ script:
           then:
             - switch.turn_on: fans_on_off_sw
             - lambda: id(status_msg).publish_state("Cooling down - Fan ON");
-            - delay: 1200s
+            - delay: 120s
       - switch.turn_off: fans_on_off_sw
       - lambda: id(status_msg).publish_state("Fan OFF @ < 175F");
       - logger.log: "Smoker is now cool, turning off fans"
@@ -1974,8 +2041,8 @@ script:
 
           // PID Terms
           float p = kp * predicted_error + center;
-          integral += predicted_error * dt;
-          integral = std::max(std::min(integral, 1000.0f), -1000.0f);  // Tighter clamp
+          integral += error * dt;
+          integral = std::max(std::min(integral, 3000.0f), -3000.0f);
           float i = ki * integral;
 
           // Derivative
@@ -2013,12 +2080,12 @@ script:
           float u_clamped = std::max(0.05f, std::min(0.80f, u));
           if (ki != 0.0) {
               integral += (u_clamped - u) / ki;
-              integral = std::max(std::min(integral, 1000.0f), -1000.0f);  // Tighter clamp
+              integral = std::max(std::min(integral, 3000.0f), -3000.0f);
           }
           u = u_clamped;
 
           // Reset for large integral
-          if (abs(integral) > 1000) {  // Tighter reset
+          if (abs(integral) > 3000) {
               integral = 0.0;
           }
 
